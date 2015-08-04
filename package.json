@@ -1,0 +1,31 @@
+{
+  "name": "bleh",
+  "version": "1.0.0",
+  "description": "Micro-framework for the BLEH stack (Browserify, Less, Express, Handlebars)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/will123195/bleh.git"
+  },
+  "author": "will123195",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/will123195/bleh/issues"
+  },
+  "homepage": "https://github.com/will123195/bleh#readme",
+  "devDependencies": {
+    "parent-require": "^1.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "client-sessions": "^0.7.0",
+    "express-page": "0.0.3",
+    "hide-property": "0.0.1",
+    "object-path": "^0.9.2",
+    "sugar-glob": "^1.2.0",
+    "xtend": "^4.0.0"
+  }
+}
