@@ -1,6 +1,6 @@
 # bleh
 
-Micro-framework for the BLEH stack
+It's so easy to make websites now. Bleh.
 
 - Browserify is automatic
 - Less compilation is automatic
@@ -8,13 +8,16 @@ Micro-framework for the BLEH stack
 - Handlebars precompilation for both server and browser is automatic
 
 Also:
-- Cookie-based sesssions
+
 - Serves static files
+- Secure sessions stored in cookies
+- No Gulp, no Grunt, just Bleh.
 
 ## Install
 
 ```
-npm install bleh --save
+npm install --save bleh
+npm install --save browserify less express handlebars
 ```
 
 ## Usage
