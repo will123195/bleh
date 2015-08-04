@@ -1,6 +1,6 @@
 # bleh
 
-The BLEH stack makes it easier to build a website.
+A micro-framework for making a website with the BLEH stack.
 
 - Browserify is automatic
 - Less compilation is automatic
