@@ -1,11 +1,11 @@
 # bleh
 
-It's so easy to make websites now. Bleh.
+The BLEH stack makes it easier to build a website.
 
 - Browserify is automatic
 - Less compilation is automatic
-- Express routes are automatic
-- Handlebars precompilation for both server and browser is automatic
+- Express routing is automatic
+- Handlebars precompilation is automatic for server and browser
 
 Also:
 
@@ -40,7 +40,8 @@ app.use('/', bleh({
     less: '.less',
     express: '.express.js',
     handlebars: '.html'
-  }
+  },
+  sessions: false
 }))
 
 app.listen(app.get('port'), function() {
@@ -70,3 +71,5 @@ app.listen(app.get('port'), function() {
 ├─ index.js
 └─ package.json
 ```
+
+
