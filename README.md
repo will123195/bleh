@@ -4,10 +4,10 @@ A micro-framework using Browserify + Less + Express + Handlebars.
 
 [![bleh](bleh.gif)](https://github.com/will123195/bleh)
 
-- *Browserify* is automatic
-- *Less* compilation is automatic
-- *Express* routing is automatic
-- *Handlebars* precompilation is automatic for server and browser
+- **Browserify** is automatic
+- **Less** compilation is automatic
+- **Express** routing is automatic
+- **Handlebars** precompilation is automatic for server and browser
 - Serves static files
 - Secure sessions stored in cookies
 
