@@ -1,5 +1,7 @@
 # bleh
 
+[![bleh](bleh.png)](https://github.com/will123195/bleh)
+
 A micro-framework using Browserify + Less + Express + Handlebars.
 
 - *Browserify* is automatic
@@ -68,7 +70,7 @@ For this reason, you will need to add `"postinstall": "bleh build"` to your `pac
 
 ## Options
 
-```
+```js
 bleh({
   // default options
   pages: [__dirname + '/pages'],
