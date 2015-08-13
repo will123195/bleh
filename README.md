@@ -8,9 +8,6 @@ A micro-framework using Browserify + Less + Express + Handlebars.
 - *Less* compilation is automatic
 - *Express* routing is automatic
 - *Handlebars* precompilation is automatic for server and browser
-
-Also:
-
 - Serves static files
 - Secure sessions stored in cookies
 
@@ -22,7 +19,6 @@ npm install --save bleh browserify less express handlebars
 
 ## Usage
 
-#### index.js
 ```js
 var express = require('express')
 var bleh = require('bleh')
@@ -62,7 +58,7 @@ app.listen(app.get('port'), function () {
 
 ## Build
 
-The build process happens automatically at runtime, except in the `production` environment. The build process creates production-ready files in the `public/dist/` folder by default.
+The client distribution build happens automatically at runtime, except in the `production` environment. The build process creates production-ready files in the `public/dist/` folder by default.
 
 In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no delay starting the app.
 
