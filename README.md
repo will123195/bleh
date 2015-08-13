@@ -2,22 +2,20 @@
 
 A micro-framework for making a website with the BLEH stack.
 
-- Browserify is automatic
-- Less compilation is automatic
-- Express routing is automatic
-- Handlebars precompilation is automatic for server and browser
+- *Browserify* is automatic
+- *Less* compilation is automatic
+- *Express* routing is automatic
+- *Handlebars* precompilation is automatic for server and browser
 
 Also:
 
 - Serves static files
 - Secure sessions stored in cookies
-- No Gulp, no Grunt, just Bleh.
 
 ## Install
 
 ```
-npm install --save bleh
-npm install --save browserify less express handlebars
+npm install --save bleh browserify less express handlebars
 ```
 
 ## Usage
@@ -34,19 +32,20 @@ app.use('/', bleh({
   // default options
   pages: __dirname + '/pages',
   public: __dirname + '/public',
-  home: '/home',
+  dist: __dirname + '/public/dist',
+  home: 'home',
   ext: {
     browserify: '.browserify.js',
     less: '.less',
-    express: '.express.js',
+    node: '.node.js',
     handlebars: '.html'
   },
   sessions: false
 }))
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log([
-    'Bleh.',
+    'My Bleh App',
     'Running: http://localhost:' + app.get('port'),
     'process.env.NODE_ENV: ' + process.env.NODE_ENV,
   ].join('\n'))
@@ -72,4 +71,10 @@ app.listen(app.get('port'), function() {
 └─ package.json
 ```
 
+## Build
 
+The build process happens automatically at runtime, except in the `production` environment. The build process creates production-ready files in the `public/dist/` folder by default.
+
+In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no delay starting the app.
+
+For this reason, you will need to add `"postinstall": "bleh build"` to your `package.json` (or simply commit `public/dist/` to version control if you don't mind the extra diffs).

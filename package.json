@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/will123195/bleh#readme",
   "devDependencies": {
-    "parent-require": "^1.0.0"
+    "parent-require": "^1.0.0",
+    "tape": "^4.1.0"
   },
   "dependencies": {
     "body-parser": "^1.13.1",
