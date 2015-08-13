@@ -1,6 +1,6 @@
 # bleh
 
-A micro-framework for making a website with the BLEH stack.
+A micro-framework using Browserify + Less + Express + Handlebars.
 
 - *Browserify* is automatic
 - *Less* compilation is automatic
@@ -28,20 +28,7 @@ var bleh = require('bleh')
 var app = express()
 app.set('port', (process.env.PORT || 5000))
 
-app.use('/', bleh({
-  // default options
-  pages: __dirname + '/pages',
-  public: __dirname + '/public',
-  dist: __dirname + '/public/dist',
-  home: 'home',
-  ext: {
-    browserify: '.browserify.js',
-    less: '.less',
-    node: '.node.js',
-    handlebars: '.html'
-  },
-  sessions: false
-}))
+app.use('/', bleh())
 
 app.listen(app.get('port'), function () {
   console.log([
@@ -78,3 +65,28 @@ The build process happens automatically at runtime, except in the `production` e
 In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no delay starting the app.
 
 For this reason, you will need to add `"postinstall": "bleh build"` to your `package.json` (or simply commit `public/dist/` to version control if you don't mind the extra diffs).
+
+## Options
+
+```
+bleh({
+  // default options
+  pages: [__dirname + '/pages'],
+  layouts: [
+    __dirname + '/layouts',
+    __dirname + '/node_modules/bleh/test/sample-app/layouts'
+  ],
+  partials: [__dirname + '/partials'],
+  public: [__dirname + '/public'],
+  dist: [__dirname + '/public/dist'],
+  home: 'home',
+  ext: {
+    browserify: '.browserify.js',
+    less: '.less',
+    node: '.node.js',
+    handlebars: '.html'
+  },
+  helpers: {},
+  sessions: false
+})
+```
