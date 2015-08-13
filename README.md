@@ -1,8 +1,8 @@
 # bleh
 
-[![bleh](bleh.gif)](https://github.com/will123195/bleh)
-
 A micro-framework using Browserify + Less + Express + Handlebars.
+
+[![bleh](bleh.gif)](https://github.com/will123195/bleh)
 
 - *Browserify* is automatic
 - *Less* compilation is automatic
