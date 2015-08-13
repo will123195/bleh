@@ -19,6 +19,7 @@ npm install --save bleh browserify less express handlebars
 
 ## Usage
 
+#### index.js
 ```js
 var express = require('express')
 var bleh = require('bleh')
