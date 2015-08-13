@@ -38,7 +38,7 @@ app.listen(app.get('port'), function () {
 })
 ```
 
-## Getting started
+## Example project file structure
 
 ```
 ├─ node_modules/
@@ -46,16 +46,18 @@ app.listen(app.get('port'), function () {
 │  ├─ home/
 │  │  ├─ home.browserify.js
 │  │  ├─ home.less
-│  │  ├─ home.express.js
+│  │  ├─ home.node.js
 │  │  └─ home.html
 │  └─ $name/
-│     └─ $name.express.js
+│     └─ $name.node.js
 ├─ public/
 │  ├─ dist/
 │  └─ robots.txt
 ├─ index.js
 └─ package.json
 ```
+
+See also the [sample app](test/sample-app).
 
 ## Build
 
