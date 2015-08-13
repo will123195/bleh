@@ -1,6 +1,6 @@
 # bleh
 
-[![bleh](bleh.png)](https://github.com/will123195/bleh)
+[![bleh](bleh.gif)](https://github.com/will123195/bleh)
 
 A micro-framework using Browserify + Less + Express + Handlebars.
 
