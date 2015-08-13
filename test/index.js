@@ -3,15 +3,34 @@ var http = require('http');
 var servertest = require('servertest');
 var express = require('express')
 
-
 test('start the app', function (t) {
-  var app = express();
-  var server = http.createServer(function (req, res) {
-    t.equal(req.url, '/home');
-    t.equal(req.headers['x-beep'], 'boop');
-    res.statusCode = 418;
-    res.end('beep boop');
-  }).listen(0, function () {
 
-  });
+});
+
+test('/', function (t) {
+
+});
+
+test('/home', function (t) {
+
+});
+
+test('/dist/home.js', function (t) {
+
+});
+
+test('/dist/home.css', function (t) {
+
+});
+
+test('/home/kitten', function (t) {
+
+});
+
+test('/ping', function (t) {
+
+});
+
+test('webdriver', function (t) {
+
 });
