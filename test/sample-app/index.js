@@ -1,15 +1,10 @@
 var express = require('express')
-var bleh = require('bleh')
+var bleh = require('../..')
+
 var app = express()
+var routes = bleh()
 
 app.set('port', (process.env.PORT || 5000))
+app.use('/', routes)
 
-app.use('/', bleh())
-
-app.listen(app.get('port'), function () {
-  console.log([
-    'My Bleh App',
-    'Running: http://localhost:' + app.get('port'),
-    'process.env.NODE_ENV: ' + process.env.NODE_ENV,
-  ].join('\n'))
-})
+module.exports = app

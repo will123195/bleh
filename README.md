@@ -14,7 +14,7 @@ A micro-framework using Browserify + Less + Express + Handlebars.
 ## Install
 
 ```
-npm install --save bleh browserify less express handlebars
+npm install -s bleh browserify less express handlebars
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ app.listen(app.get('port'), function () {
 })
 ```
 
-## Example project file structure
+#### File structure
 
 ```
 ├─ node_modules/
@@ -61,11 +61,17 @@ See also the [sample app](test/sample-app).
 
 ## Build
 
-The client distribution build happens automatically at runtime, except in the `production` environment. The build process creates production-ready files in the `public/dist/` folder by default.
+The build happens automatically at runtime, except in the `production` environment. Production-ready files are created in the `public/dist/` folder by default.
 
-In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no delay starting the app.
+In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no brief delay starting the app.
 
-For this reason, you will need to add `"postinstall": "bleh build"` to your `package.json` (or simply commit `public/dist/` to version control if you don't mind the extra diffs).
+While developing, it's useful to run the app with a watch script like this to restart the app when any source file changes:
+
+```
+nodemon -e js,html,css,less,json,txt --ignore public/dist/
+```
+
+You may choose to *gitignore* `public/dist/` to prevent extra diffs in your commits. In this case you should add `"postinstall": "bleh build"` to your `package.json` to ensure your app is rebuilt after install, i.e. when deployed to production.
 
 ## Options
 

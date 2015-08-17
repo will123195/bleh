@@ -11,29 +11,35 @@ var path = require('path')
 var obj = require('object-path')
 var sessions = require('client-sessions')
 
-var mainstream = module.exports = function (app, opts) {
+var bleh = module.exports = function bleh (options) {
 
-  var reqPath = path.dirname(module.parent.filename)
+  if (!(this instanceof bleh)) {
+    return new bleh(options)
+  }
 
+  options = options || {}
   var defaults = {
     https: true,
     log: console.log
   }
+  var opts = xtend(defaults, options)
 
-  var opts = xtend(defaults, opts)
+  var reqPath = path.dirname(module.parent.filename)
 
+  var helpers = require('./lib/helpers')({
+    __root: reqPath
+  })
+
+  var app = express()
 
   // start session
   var sessionSecret = obj.get(opts, 'sessions.secret')
-  if (!sessionSecret) {
-    return console.error("sessions.secret must be at least 20 chars.")
-  } else {
+  if (sessionSecret) {
     app.use(sessions({
       cookieName: 'session',
       secret: sessionSecret
     }))
   }
-
 
   // serve static files
   app.static = function (uri, path) {
@@ -41,14 +47,16 @@ var mainstream = module.exports = function (app, opts) {
   }
   app.static('/', reqPath + '/public')
 
+  console.log('helpers:', helpers)
 
   // pages
   var pages = require('express-pages')
   app.use('/', pages({
     dir: reqPath + '/' + (opts.dir || 'pages'),
-    ext: opts.ext || '.node.js'
+    ext: opts.ext || '.node.js',
+    homepage: 'home',
+    helpers: helpers
   }))
-
 
   // redirect to https
   if (opts.https && process.env.NODE_ENV === 'production') {
@@ -60,7 +68,6 @@ var mainstream = module.exports = function (app, opts) {
       next()
     })
   }
-
 
   return app
 }

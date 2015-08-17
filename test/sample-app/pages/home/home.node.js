@@ -15,6 +15,8 @@ module.exports = function ($) {
 
   $.js.push('/vendor/kitten.js')
 
+  console.log('$:', $)
+
   $.layout('website')
   // shortcut for:
   // $.css.push($.layouts.website.css)
