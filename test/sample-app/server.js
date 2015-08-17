@@ -1,4 +1,4 @@
-var app = require('..')
+var app = require('./index')
 
 app.listen(app.get('port'), function () {
   console.log([
