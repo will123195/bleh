@@ -47,8 +47,6 @@ var bleh = module.exports = function bleh (options) {
   }
   app.static('/', reqPath + '/public')
 
-  console.log('helpers:', helpers)
-
   // pages
   var pages = require('express-pages')
   app.use('/', pages({

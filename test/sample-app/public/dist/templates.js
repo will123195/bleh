@@ -1,6 +1,5 @@
 module.exports = function (Handlebars) {
-var template = Handlebars.template;
-var templates = {};
+var template = Handlebars.template, templates = {};
 templates['partials/css'] = template({"1":function(depth0,helpers,partials,data) {
     return "  <link href=\""
     + this.escapeExpression(this.lambda(depth0, depth0))
@@ -56,7 +55,7 @@ templates['node_modules/bleh/layouts/html5/html5'] = template({"1":function(dept
     + this.escapeExpression(this.lambda(depth0, depth0))
     + "\"></script>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, options, alias1=helpers.helperMissing, alias2="function", alias3=helpers.blockHelperMissing, buffer =
+    var stack1, helper, options, alias1=helpers.helperMissing, alias2="function", alias3=helpers.blockHelperMissing, buffer = 
   "<html>\n  <head>\n    <title>"
     + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
     + "</title>\n";
