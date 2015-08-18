@@ -1,3 +1,4 @@
+var xtend = require('xtend')
 var hello = require('./hello')
 
 console.log('home.browserify.js')
