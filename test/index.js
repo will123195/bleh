@@ -3,11 +3,12 @@ var request = require('request')
 var http = require('http')
 
 var app = require('./sample-app')
-var port = app.get('port')
+var port = 5555
+app.set('port', port)
 var server = http.createServer(app);
 
 var get = function (uri, cb) {
-  var url = 'http://localhost' + ':' + app.get('port') + uri
+  var url = 'http://localhost' + ':' + port + uri
   request.get(url, cb)
 }
 
