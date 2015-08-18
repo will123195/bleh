@@ -3,7 +3,7 @@
 var program = require('commander')
 var package = require('../package.json')
 var chalk = require('chalk')
-var build = require('../lib/build')
+var build = require('../build')
 
 program.version(package.version)
 

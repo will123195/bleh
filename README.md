@@ -1,6 +1,6 @@
 # bleh
 
-A micro-framework using Browserify + Less + Express + Handlebars.
+A web framework using Browserify + Less + Express + Handlebars.
 
 [![bleh](bleh.gif)](https://github.com/will123195/bleh)
 
@@ -71,7 +71,7 @@ While developing, it's useful to run the app with a watch script like this to re
 nodemon -e js,html,css,less,json,txt --ignore public/dist/
 ```
 
-You may choose to *gitignore* `public/dist/` to prevent extra diffs in your commits. In this case you should add `"postinstall": "bleh build"` to your `package.json` to ensure your app is rebuilt after install, i.e. when deployed to production.
+You may choose to *gitignore* `public/dist/` to prevent extra diffs in your commits. In this case you should add `"postinstall": "bleh build"` to your `package.json` to ensure your app is built after install, i.e. when deployed to production.
 
 ## Options
 

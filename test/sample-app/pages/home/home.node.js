@@ -15,7 +15,7 @@ module.exports = function ($) {
 
   $.js.push('/vendor/kitten.js')
 
-  console.log('$:', $)
+  //console.log('$:', $)
 
   $.layout('website')
   // shortcut for:
@@ -23,7 +23,7 @@ module.exports = function ($) {
   // $.js.push($.layouts.website.js)
   // $.layouts.website.bind($)($);
 
-  console.log('now:', $.now) // set in website.node.js
+  //console.log('now:', $.now) // set in website.node.js
 
   $.render()
 
