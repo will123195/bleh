@@ -1,6 +1,14 @@
-var blah = require('./blah')
+var hello = require('./hello')
 
 console.log('home.browserify.js')
 
-blah()
-blah()
+var test = xtend({
+  a: 1
+}, {
+  b: 2
+})
+
+console.log('test:', test)
+
+hello()
+hello()

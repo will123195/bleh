@@ -1,0 +1,5 @@
+{
+  "browserifySharedDependencies": [
+    "xtend"
+  ]
+}
