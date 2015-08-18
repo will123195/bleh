@@ -57,6 +57,8 @@ module.exports = function (options, cb) {
       lines[0] = 'module.exports = function (Handlebars) {'
       lines[1] = 'var template = Handlebars.template, templates = {};'
       lines.pop()
+      lines.pop()
+      lines.push('')
       lines.push('return templates;')
       lines.push('}')
       lines.forEach(function (line, i) {
