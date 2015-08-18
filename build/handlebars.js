@@ -11,7 +11,7 @@ function getViewName (name, ext) {
   var view = name
     .replace(cwd, '')
     .replace(ext, '')
-    .replace('node_modules/bleh/', '')
+    .replace('node_modules/bleh/shared/', '')
     .split(path.sep)
   var len = view.length
   if (len > 1 && view[len-1] === view[len-2]) {
@@ -30,7 +30,7 @@ module.exports = function (options, cb) {
       path.join(cwd, 'partials'),
       path.join(cwd, 'layouts'),
       path.join(cwd, 'pages'),
-      path.join(cwd, 'node_modules/bleh/global/layouts')
+      path.join(cwd, 'node_modules/bleh/shared/layouts')
     ],
     dist: 'public/dist'
   }
