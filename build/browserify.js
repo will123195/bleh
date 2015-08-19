@@ -4,21 +4,7 @@ var scan = require('sugar-glob')
 var async = require('async')
 var mkdirp = require('mkdirp')
 var fs = require('fs')
-
-function getViewName (name, ext) {
-  ext = ext || ''
-  var cwd = process.cwd() + path.sep
-  var view = name
-    .replace(cwd, '')
-    .replace(ext, '')
-    .replace('node_modules/bleh/shared/', '')
-    .split(path.sep)
-  var len = view.length
-  if (len > 1 && view[len-1] === view[len-2]) {
-    view.pop()
-  }
-  return view.join(path.sep)
-}
+var getViewName = require('../lib/get-view-name')
 
 module.exports = function (opts, cb) {
 
@@ -51,7 +37,7 @@ module.exports = function (opts, cb) {
     .done(done)
   }, cb)
 
-  function saveBrowserify(file) {
+  function saveBrowserify (file) {
     var view = file.name.replace('.browserify.js', '')
     view = getViewName(view)
     var filename = cwd + '/' + dist + '/' + view + '.js'
@@ -77,7 +63,7 @@ module.exports = function (opts, cb) {
 
 }
 
-function write(filename, buf) {
+function write (filename, buf) {
   mkdirp.sync(path.dirname(filename))
   fs.writeFileSync(filename, buf)
 }
