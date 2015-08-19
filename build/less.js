@@ -18,25 +18,32 @@ module.exports = function (opts, cb) {
   ]
 
   var css = {}
+  var files = []
 
   async.each(paths, function (dir, done) {
     scan({
       root: dir
     })
-    .file('**/*.less', saveLess)
+    .file('**/*.less', function (file) {
+      files.push(file)
+    })
     .done(done)
   }, function (err) {
     if (err) {
       return cb(err)
     }
-    console.log('css:', css)
-    cb()
+    async.each(files, saveLess, function (err) {
+      if (err) {
+        console.log('LESS:', err)
+        return cb(err)
+      }
+      console.log('css:', css)
+      cb(null, css)
+    })
   })
 
-  function saveLess (file) {
-    console.log('file:', file)
+  function saveLess (file, done) {
     var lessCode = fs.readFileSync(file.filename, 'utf8')
-    css[file.dir] = []
     less.render(lessCode, {
       paths: [                // Specify search paths for @import directives
         cwd,
@@ -46,17 +53,18 @@ module.exports = function (opts, cb) {
       compress: false         // Minify CSS output
     }, function (err, cssCode) {
       if (err) {
-        console.log('LESS:', err)
-        return
+        return done(err)
       }
       var cachebust = MD5(cssCode.css).substring(0, 8)
-      var name = file.filename.replace(cwd, '')
+      var name = file.filename.replace(cwd + '/', '')
       var view = getViewName(name.replace('.less', ''))
       var uri = assetsUri + view + '.css'
       var filename = path.normalize(cwd + '/' + dist + '/' + view + '.css')
       mkdirp.sync(path.dirname(filename))
       fs.writeFileSync(filename, cssCode.css)
-      css[file.dir].push(uri + '?' + cachebust)
+      css[view] = css[view] || []
+      css[view].push(uri + '?' + cachebust)
+      done()
     })
   }
 }
