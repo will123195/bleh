@@ -6,22 +6,23 @@ var mkdirp = require('mkdirp')
 var fs = require('fs')
 var getViewName = require('../lib/get-view-name')
 
+// opts.root
 module.exports = function (opts, cb) {
 
-  var cwd = process.cwd()
+  var root = opts.root || process.cwd()
   var dist = 'public/dist'
 
   var paths = [
-    cwd,
-    cwd + '/node_modules/bleh/shared'
+    root,
+    root + '/node_modules/bleh/shared'
   ]
 
-  var package = require(cwd + '/package.json')
+  var package = require(root + '/package.json')
 
   // browserify shared client-side dependencies
   var sharedDependencies = package.browserifySharedDependencies || []
   var sharedUri = '/' + dist + '/shared.js'
-  var filename = path.join(cwd, sharedUri)
+  var filename = path.join(root, sharedUri)
   var b = browserify()
   b.require(sharedDependencies)
   b.bundle(function(err, buf) {
@@ -39,8 +40,10 @@ module.exports = function (opts, cb) {
 
   function saveBrowserify (file) {
     var view = file.name.replace('.browserify.js', '')
-    view = getViewName(view)
-    var filename = cwd + '/' + dist + '/' + view + '.js'
+    view = getViewName({
+      name: view
+    })
+    var filename = root + '/' + dist + '/' + view + '.js'
     var b = browserify()
     b.add(file.filename)
     b.external(sharedDependencies)

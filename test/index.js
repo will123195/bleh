@@ -13,7 +13,9 @@ var get = function (uri, cb) {
 }
 
 test('start server', function (t) {
-  server.listen(port, t.end.bind(t))
+  app.on('ready', function () {
+    server.listen(port, t.end.bind(t))
+  })
 })
 
 test('url params', function (t) {

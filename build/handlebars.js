@@ -6,17 +6,18 @@ var fs = require('fs')
 var mkdirp = require('mkdirp')
 var getViewName = require('../lib/get-view-name')
 
+// opts.root
 // opts.paths
 // opts.dist
 module.exports = function (options, cb) {
-  var cwd = process.cwd()
+  var root = options.root || process.cwd()
   var defaults = {
-    handlebars: path.join(cwd, 'node_modules/.bin/handlebars'),
+    handlebars: path.join(root, 'node_modules/.bin/handlebars'),
     paths: [
-      path.join(cwd, 'partials'),
-      path.join(cwd, 'layouts'),
-      path.join(cwd, 'pages'),
-      path.join(cwd, 'node_modules/bleh/shared/layouts')
+      path.join(root, 'partials'),
+      path.join(root, 'layouts'),
+      path.join(root, 'pages'),
+      path.join(root, 'node_modules/bleh/shared/layouts')
     ],
     dist: 'public/dist'
   }
@@ -24,7 +25,7 @@ module.exports = function (options, cb) {
   //console.log('opts:', opts)
 
   var templates = {}
-  var dir = path.join(cwd, opts.dist)
+  var dir = path.join(root, opts.dist)
   mkdirp.sync(dir)
   var paths = opts.paths.join(' ')
 
@@ -34,7 +35,7 @@ module.exports = function (options, cb) {
         opts.handlebars,
         opts.paths.join(' '),
         '-e html',
-        '-r ' + cwd
+        '-r ' + root
       ].join(' ')
       exec(command, next)
     },
@@ -51,7 +52,9 @@ module.exports = function (options, cb) {
         var pattern = /templates\[\'(.*)\'\] = template/
         var match = line.match(pattern)
         if (match && match.index === 0) {
-          var view = getViewName(match[1])
+          var view = getViewName({
+            name: match[1]
+          })
           lines[i] = '\n' + line.replace(match[1], view)
         }
       })

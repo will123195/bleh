@@ -8,13 +8,13 @@ var mkdirp = require('mkdirp')
 var getViewName = require('../lib/get-view-name')
 
 module.exports = function (opts, cb) {
-  var cwd = process.cwd()
+  var root = opts.root || process.cwd()
   var dist = 'public/dist'
   var assetsUri = '/dist/'
   var paths = [
-    cwd + '/pages',
-    cwd + '/layouts',
-    cwd + '/node_modules/bleh/shared/layouts'
+    root + '/pages',
+    root + '/layouts',
+    root + '/node_modules/bleh/shared/layouts'
   ]
 
   var css = {}
@@ -45,8 +45,8 @@ module.exports = function (opts, cb) {
     var lessCode = fs.readFileSync(file.filename, 'utf8')
     less.render(lessCode, {
       paths: [                // Specify search paths for @import directives
-        cwd,
-        cwd + '/node_modules/bleh/shared'
+        root,
+        root + '/node_modules/bleh/shared'
       ],
       filename: file.name,    // Specify a filename, for better error messages
       compress: false         // Minify CSS output
@@ -55,10 +55,12 @@ module.exports = function (opts, cb) {
         return done(err)
       }
       var cachebust = MD5(cssCode.css).substring(0, 8)
-      var name = file.filename.replace(cwd + '/', '')
-      var view = getViewName(name.replace('.less', ''))
+      var name = file.filename.replace(root + '/', '')
+      var view = getViewName({
+        name: name.replace('.less', '')
+      })
       var uri = assetsUri + view + '.css'
-      var filename = path.normalize(cwd + '/' + dist + '/' + view + '.css')
+      var filename = path.normalize(root + '/' + dist + '/' + view + '.css')
       mkdirp.sync(path.dirname(filename))
       fs.writeFileSync(filename, cssCode.css)
       css[view] = css[view] || []

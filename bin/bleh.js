@@ -3,6 +3,7 @@
 var program = require('commander')
 var package = require('../package.json')
 var chalk = require('chalk')
+var xtend = require('xtend')
 var build = require('../build')
 
 program.version(package.version)
@@ -11,7 +12,9 @@ var opts = program.command('build')
   .option('-v --verbose')
   .description('create the dist files')
   .action(function () {
-    build(opts)
+    build(xtend(opts, {
+      cli: true
+    }))
   })
 
 program.command('*')
