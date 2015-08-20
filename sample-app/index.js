@@ -1,5 +1,5 @@
 var express = require('express')
-var bleh = require('../..')
+var bleh = require('..')
 
 var app = express()
 var routes = bleh()

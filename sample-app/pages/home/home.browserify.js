@@ -13,3 +13,9 @@ console.log('test:', test)
 
 hello()
 hello()
+
+var html = render('partials/header', {
+  title: 'render test!'
+})
+
+console.log('html:', html)

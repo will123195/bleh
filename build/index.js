@@ -16,6 +16,7 @@ module.exports = function (opts) {
     debug('verbose!')
   }
 
+  // TODO: async.auto (browserify html5 needs templates.js)
   async.parallel([
     function (done) {
       handlebars({}, done)

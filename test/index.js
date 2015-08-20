@@ -2,7 +2,7 @@ var test = require('tape')
 var request = require('request')
 var http = require('http')
 
-var app = require('./sample-app')
+var app = require('../sample-app')
 var port = 5555
 app.set('port', port)
 var server = http.createServer(app);

@@ -37,7 +37,6 @@ module.exports = function (opts, cb) {
         console.log('LESS:', err)
         return cb(err)
       }
-      console.log('css:', css)
       cb(null, css)
     })
   })
