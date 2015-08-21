@@ -9,7 +9,10 @@ var server = http.createServer(app);
 
 var get = function (uri, cb) {
   var url = 'http://localhost' + ':' + port + uri
-  request.get(url, cb)
+  request.get({
+    url: url,
+    followRedirect: false
+  }, cb)
 }
 
 test('start server', function (t) {
@@ -22,9 +25,13 @@ test('url params', function (t) {
   get('/1-2', function (err, res) {
     t.error(err)
     t.equal(res.statusCode, 200)
-    var data = JSON.parse(res.body)
-    t.equal(data.low, '1')
-    t.equal(data.high, '2')
+    try {
+      var data = JSON.parse(res.body)
+      t.equal(data.low, '1')
+      t.equal(data.high, '2')
+    } catch (e) {
+      t.error('invalid json: ' + res.body)
+    }
     t.end()
   })
 })
@@ -40,7 +47,7 @@ test('homepage', function (t) {
 test('canonical homepage', function (t) {
   get('/home', function (err, res) {
     t.error(err)
-    t.equal(res.statusCode, 404)
+    t.equal(res.statusCode, 302)
     t.end()
   })
 })

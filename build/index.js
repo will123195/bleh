@@ -57,7 +57,7 @@ module.exports = function (options, cb) {
     }
     debug('dist', path.join(opts.root, 'public', 'dist'))
     var elapsed = Date.now() - start
-    console.log(chalk.cyan('bleh:build', elapsed + 'ms'))
+    console.log(chalk.cyan('bleh:build', 'complete', elapsed + 'ms'))
     cb(null)
   })
 }
