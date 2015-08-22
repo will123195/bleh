@@ -4,6 +4,6 @@ node_js:
 install:
   - npm install
   - mkdir sample-app/node_modules
-  - ln -s node_modules/.bin sample-app/node_modules/.bin
-  - ln -s node_modules/bleh .
+  - ln -s node_modules/.bin ./sample-app/node_modules/.bin
+  - ln -s ./ ./sample-app/node_modules/bleh
   - ls -la sample-app/node_modules
