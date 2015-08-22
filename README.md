@@ -121,6 +121,12 @@ Your handlebars helpers will work on both the server and client if you specify t
 
 For example: [`handlebars-helpers.js`](sample-app/lib/handlebars-helpers.js)
 
+Also, if you're using the `html5` layout, a global `render()` function is available to render any of your `.html` templates on the client.
+
+```js
+var html = render('partials/kitten', data)
+```
+
 ## Options
 
 All options are optional.
