@@ -173,7 +173,7 @@ bleh({
 
 The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder.
 
-#### pages/beep.json.node.js
+##### pages/beep.json.node.js
 uri: `/beep.json`
 ```js
 module.exports = function () {
@@ -183,7 +183,7 @@ module.exports = function () {
 }
 ```
 
-#### pages/hello/hello.node.js
+##### pages/hello/hello.node.js
 uri: `/hello`
 ```js
 module.exports = function ($) {
@@ -195,7 +195,7 @@ module.exports = function ($) {
 }
 ```
 
-#### pages/$user/$user.node.js
+##### pages/$user/$user.node.js
 
 `$` followed by a word indicates a [url param](http://expressjs.com/api.html#app.param).
 uri: `/will123195`
@@ -206,7 +206,7 @@ module.exports = function () {
 }
 ```
 
-#### layouts/website/website.node.js
+##### layouts/website/website.node.js
 
 Each layout has a controller that runs when the [`layout`](#layout) method is invoked. Bleh comes with a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` onto the page.
 
