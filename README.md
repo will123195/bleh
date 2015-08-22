@@ -102,7 +102,7 @@ nodemon -e js,html,css,less,json,txt --ignore public/dist/
 
 #### Browserify
 
-If you add your commonly used client-side npm modules to the `browserifyCommonDependencies` array in your `package.json`, then an [external browserify bundle](https://github.com/substack/node-browserify#multiple-bundles) will be used. This will reduce the size of your page-specific `js` bundles.
+If you add your commonly used client-side npm modules to the [`browserifyCommonDependencies`](sample-app/package.json) array in your `package.json`, then an [external browserify bundle](https://github.com/substack/node-browserify#multiple-bundles) will be used. This will reduce the size of your page-specific `js` bundles.
 
 #### Less
 
