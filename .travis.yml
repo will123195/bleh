@@ -6,3 +6,4 @@ install:
   - mkdir sample-app/node_modules
   - ln -s node_modules/.bin sample-app/node_modules/.bin
   - ln -s node_modules/bleh .
+  - ls -la sample-app/node_modules
