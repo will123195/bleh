@@ -28,7 +28,13 @@ module.exports = function (opts, cb) {
   b.require(root + '/public/dist/templates.js', {
     expose: 'handlebars-templates'
   })
-  b.require(root + '/lib/handlebars-helpers.js', {
+
+  var handlebarsHelpersPath = __dirname + '/../lib/handlebars-helpers.js'
+  var handlebarsHelpers = root + path.sep + 'lib/handlebars-helpers.js'
+  if (fs.existsSync(handlebarsHelpers)) {
+    handlebarsHelpersPath = handlebarsHelpers
+  }
+  b.require(handlebarsHelpersPath, {
     expose: 'handlebars-helpers'
   })
   b.bundle(function(err, buf) {

@@ -12,7 +12,7 @@ module.exports = function (Handlebars) {
       html += block.fn(i)
     }
     return html
-  });
+  })
 
   return Handlebars
 }

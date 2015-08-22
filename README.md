@@ -117,7 +117,7 @@ You can [reference](http://lesscss.org/features/#import-options-reference) any o
 
 #### Handlebars
 
-Your handlebars helpers will work on both the server and client if you specify them in `lib/handlebars-helpers.js` (assuming you're using the `html5` layout.
+Your handlebars helpers will work on both the server and client if you specify them in `lib/handlebars-helpers.js` (assuming you're using the `html5` layout).
 
 For example: [`handlebars-helpers.js`](sample-app/lib/handlebars-helpers.js)
 
