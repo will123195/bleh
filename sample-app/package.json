@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "nodemon -e js,html,css,less,json,txt --ignore public/dist/"
+  },
   "browserifySharedDependencies": [
     "xtend"
   ]
