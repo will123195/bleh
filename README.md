@@ -196,8 +196,6 @@ module.exports = function ($) {
 ```
 
 ##### pages/$user/$user.node.js
-
-Using `$` in the name of your page indicates a [url param](http://expressjs.com/api.html#app.param).
 ```js
 // uri: /will123195
 module.exports = function () {
@@ -205,17 +203,16 @@ module.exports = function () {
   this.render()
 }
 ```
+[Url params](http://expressjs.com/api.html#app.param) are supported by using `$`.
 
 ##### layouts/website/website.node.js
-
-Each layout has a controller that runs when the [`layout`](#layout) method is invoked. Bleh comes with a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` onto the page.
-
 ```js
 module.exports = function ($) {
   $.now = Date.now()  // set data for all pages using this layout
   $.layout('html5')   // html5 boilerplate + link css & js
 }
 ```
+Each layout has a controller that runs when the [`layout`](#layout) method is invoked. Bleh comes with a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` onto the page.
 
 ### Default helpers
 
