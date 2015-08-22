@@ -11,7 +11,7 @@ A web framework using Browserify + Less + Express + Handlebars.
 - **Express** routing is automatic
 - **Handlebars** precompilation is automatic for server and browser
 - Serves static files
-- Secure sessions stored in cookies
+- Secure cookie-based sessions
 
 ## Install
 
@@ -114,6 +114,8 @@ You may choose to gitignore `public/dist/` to prevent extra diffs in your commit
 
 ## Options
 
+All options are optional.
+
 ```js
 var app = bleh({
   // default options
@@ -144,7 +146,7 @@ Defaults to `console.log`.
 
 ### root
 
-The path to the root folder of your app should contain the above [file structure](#file-structure). Defaults to the current file's diractory.
+The path to the root folder of your app should contain the above [file structure](#file-structure).
 
 ### sessions
 
