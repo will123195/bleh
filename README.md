@@ -171,7 +171,9 @@ bleh({
 
 ## Controllers
 
-The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder. For example:
+The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder.
+
+For example:
 
 ##### pages/beep.json.node.js
 ```js
@@ -203,7 +205,6 @@ module.exports = function () {
   this.render()
 }
 ```
-[Url params](http://expressjs.com/api.html#app.param) are supported by using `$`.
 
 ##### layouts/website/website.node.js
 ```js
