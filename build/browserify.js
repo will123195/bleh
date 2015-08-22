@@ -19,12 +19,12 @@ module.exports = function (opts, cb) {
 
   var package = require(root + '/package.json')
 
-  // browserify shared client-side dependencies
-  var sharedDependencies = package.browserifySharedDependencies || []
-  var sharedUri = '/' + dist + '/shared.js'
-  var filename = path.join(root, sharedUri)
+  // browserify common client-side dependencies
+  var commonDependencies = package.browserifyCommonDependencies || []
+  var commonUri = '/' + dist + '/common.js'
+  var filename = path.join(root, commonUri)
   var b = browserify()
-  b.require(sharedDependencies)
+  b.require(commonDependencies)
   b.bundle(function(err, buf) {
     if (err) throw new Error(err)
     write(filename, buf)
@@ -46,18 +46,18 @@ module.exports = function (opts, cb) {
     var filename = root + '/' + dist + '/' + view + '.js'
     var b = browserify()
     b.add(file.filename)
-    b.external(sharedDependencies)
+    b.external(commonDependencies)
     b.bundle(function(err, buf) {
       if (err) throw new Error(err)
       write(filename, buf)
     })
 
     // js[file.dir] = []
-    // js[file.dir].push(sharedUri)
+    // js[file.dir].push(commonUri)
     // js[file.dir].push(uri)
 
     // layoutJs[file.dir] = layoutJs[file.dir] || []
-    // layoutJs[file.dir].push(sharedUri)
+    // layoutJs[file.dir].push(commonUri)
     // layoutJs[file.dir].push(uri)
 
     // pageJs[file.dir] = pageJs[file.dir] || []

@@ -18,4 +18,5 @@ var html = render('partials/header', {
   title: 'render test!'
 })
 
-console.log('html:', html)
+document.getElementById('client-render').innerHtml = html
+

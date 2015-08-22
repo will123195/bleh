@@ -100,6 +100,16 @@ While developing, it's useful to run the app with a watch script to restart the 
 nodemon -e js,html,css,less,json,txt --ignore public/dist/
 ```
 
+### Browserify
+
+If you add your commonly used client-side npm modules to the `browserifyCommonDependencies` array in your `package.json`, then an [external browserify bundle](https://github.com/substack/node-browserify#multiple-bundles) will be used. This will reduce the size of your page-specific `js` bundles.
+
+### Handlebars
+
+Your handlebars helpers will work on both the server and client if you specify them in `lib/handlebars-helpers.js` (assuming you're using the `html5` layout.
+
+For example: [handlebars-helpers.js](sample-app/lib/handlebars-helpers.js)
+
 ## Options
 
 All options are optional.
@@ -197,7 +207,7 @@ Each layout has a controller that runs when the [layout](#layout) method is invo
 
 ```js
 module.exports = function ($) {
-  $.now = Date.now()  // set data needed for all pages using this layout
+  $.now = Date.now()  // set data for all pages using this layout
   $.layout('html5')   // html5 boilerplate + autolink css & js
 }
 ```
@@ -206,20 +216,20 @@ module.exports = function ($) {
 
 - [`accessDenied()`](#accessDenied)
 - [`body`](#body)
-- ['error(err)`](#error)
-- ['get(fn)`](#get)
-- ['layout(name)`](#layout)
-- ['notFound()`](#notFound)
-- ['post(fn)`](#post)
-- ['query`](#query)
-- ['redirect([301|302], uri)`](#redirect)
-- ['render()`](#render)
-- ['req`](#req)
-- ['res`](#res)
-- ['send(obj|str)`](#send)
-- ['session`](#session)
-- ['set(helpers)`](#set)
-- ['view(name)`](#view)
+- [`error(err)`](#error)
+- [`get(fn)`](#get)
+- [`layout(name)`](#layout)
+- [`notFound()`](#notFound)
+- [`post(fn)`](#post)
+- [`query`](#query)
+- [`redirect([301|302], uri)`](#redirect)
+- [`render()`](#render)
+- [`req`](#req)
+- [`res`](#res)
+- [`send(obj|str)`](#send)
+- [`session`](#session)
+- [`set(helpers)`](#set)
+- [`view(name)`](#view)
 
 Any additional `helpers` specified in the [options](#options) are also available in all controllers.
 
