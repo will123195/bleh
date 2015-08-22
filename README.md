@@ -66,9 +66,7 @@ Routes are generated automatically based on the `pages/` folder structure. Each 
 
 The page's corresponding `js` and `css` files are linked onto the html of the page automatically if the page is using the `html5` layout.
 
-### layouts/
-
-Layouts can be used by pages or other layouts with the `layout` method. Layouts are just like pages except layout templates have a `{{{main}}}` expression. Also unlike pages, layouts do not generate routes.
+Each page and layout has a `.node.js` controller.
 
 ```js
 module.exports = function () {
@@ -77,6 +75,12 @@ module.exports = function () {
   this.render()
 }
 ```
+
+Helpers that are set in the [options](#options) are available in `this` context of the controllers.
+
+### layouts/
+
+Layouts can be used by pages or other layouts with the `layout()` method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression. Also unlike pages, layouts do not generate routes.
 
 ### partials/
 
