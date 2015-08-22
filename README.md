@@ -100,11 +100,11 @@ While developing, it's useful to run the app with a watch script to restart the 
 nodemon -e js,html,css,less,json,txt --ignore public/dist/
 ```
 
-### Browserify
+#### Browserify
 
 If you add your commonly used client-side npm modules to the `browserifyCommonDependencies` array in your `package.json`, then an [external browserify bundle](https://github.com/substack/node-browserify#multiple-bundles) will be used. This will reduce the size of your page-specific `js` bundles.
 
-### Less
+#### Less
 
 You can [reference](http://lesscss.org/features/#import-options-reference) any other `.less` file to gain access to its variables/classes/mixins. For example, the [`html5`](shared/layouts/html5) layout provides a `.clearfix` style for convenience.
 
@@ -115,7 +115,7 @@ You can [reference](http://lesscss.org/features/#import-options-reference) any o
 }
 ```
 
-### Handlebars
+#### Handlebars
 
 Your handlebars helpers will work on both the server and client if you specify them in `lib/handlebars-helpers.js` (assuming you're using the `html5` layout.
 
