@@ -26,7 +26,7 @@ var bleh = module.exports = function bleh (options) {
   self.root = path.dirname(module.parent.filename)
 
   app.on('mount', function (parent) {
-    self.parent = parent
+    self.app.parent = parent
   })
 
   if (process.env.NODE_ENV !== 'production') {
@@ -36,19 +36,19 @@ var bleh = module.exports = function bleh (options) {
       self.start(options)
     })
   } else {
-    self.start(options)
+    process.nextTick(function () {
+      self.start(options)
+    })
   }
   return app
 }
 
 bleh.prototype.ready = function () {
   var self = this
-  var interval = setInterval(function () {
-    if (self.parent) {
-      self.parent.emit('ready', true)
-      clearInterval(interval)
-    }
-  }, 10)
+  self.app.emit('ready', true)
+  if (self.app.parent) {
+    self.app.parent.emit('ready', true)
+  }
 }
 
 bleh.prototype.start = function (options) {
@@ -57,7 +57,7 @@ bleh.prototype.start = function (options) {
     https: true,
     log: console.log,
     root: this.root,
-    home: '/home'
+    home: 'home'
   }
   var opts = xtend(defaults, options)
 
@@ -66,6 +66,17 @@ bleh.prototype.start = function (options) {
   opts.helpers = require('./lib/helpers')(opts)
 
   var app = this.app
+
+  // redirect to https
+  if (opts.https && process.env.NODE_ENV === 'production') {
+    app.use(function(req, res, next) {
+      var secure = (req.headers['x-forwarded-proto'] === 'https')
+      if (!secure) {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''))
+      }
+      next()
+    })
+  }
 
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({
@@ -99,17 +110,6 @@ bleh.prototype.start = function (options) {
 
   // routes
   app.use('/', routes(opts))
-
-  // redirect to https
-  if (opts.https && process.env.NODE_ENV === 'production') {
-    app.use(function(req, res, next) {
-      var secure = (req.headers['x-forwarded-proto'] === 'https')
-      if (!secure) {
-        return res.redirect(['https://', req.get('Host'), req.url].join(''))
-      }
-      next()
-    })
-  }
 
   this.ready()
 

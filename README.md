@@ -21,19 +21,16 @@ npm install -s bleh browserify less express handlebars
 
 #### index.js
 ```js
-var express = require('express')
 var bleh = require('bleh')
 
-var app = express()
+var app = bleh()
 app.set('port', (process.env.PORT || 5000))
-
-app.use('/', bleh())
 
 app.listen(app.get('port'), function () {
   console.log([
-    'My Bleh App',
+    'My App',
     'Running: http://localhost:' + app.get('port'),
-    'process.env.NODE_ENV: ' + process.env.NODE_ENV,
+    'NODE_ENV: ' + process.env.NODE_ENV,
   ].join('\n'))
 })
 ```
@@ -76,24 +73,41 @@ You may choose to *gitignore* `public/dist/` to prevent extra diffs in your comm
 ## Options
 
 ```js
-bleh({
+var app = bleh({
   // default options
-  pages: [__dirname + '/pages'],
-  layouts: [
-    __dirname + '/layouts',
-    __dirname + '/node_modules/bleh/test/sample-app/layouts'
-  ],
-  partials: [__dirname + '/partials'],
-  public: [__dirname + '/public'],
-  dist: [__dirname + '/public/dist'],
-  home: 'home',
-  ext: {
-    browserify: '.browserify.js',
-    less: '.less',
-    node: '.node.js',
-    handlebars: '.html'
-  },
   helpers: {},
+  home: 'home',
+  https: false,
+  log: console.log,
+  root: __dirname,
   sessions: false
+})
+```
+
+### helpers
+
+
+
+### home
+
+
+### https
+
+
+### log
+
+
+### root
+
+
+### sessions
+
+Specify a secret for encrypting cookie-based session data. If you change this key all user sessions will be erased (all users will get logged out).
+
+```
+bleh({
+  sessions: {
+    secret: 'my secret key'
+  }
 })
 ```
