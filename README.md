@@ -60,17 +60,17 @@ app.on('ready', function () {
 
 See also the [sample app](sample-app).
 
-### pages/
+#### pages/
 
 Routes are generated automatically based on the `pages/` folder structure. Each page has a [controller](#controllers) (`.node.js` file) and pages normally have `.html`, `.less` and `.browserify.js` files located together in that page's folder.
 
 The page's corresponding `js` and `css` are linked onto the html of the page automatically if the page is using the `html5` layout.
 
-### layouts/
+#### layouts/
 
 Layouts can be invoked by pages or other layouts with the [`layout`](#layout) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. Also, unlike pages, layouts do not generate routes.
 
-### partials/
+#### partials/
 
 Partials can be included in other templates.
 
@@ -80,7 +80,7 @@ Partials can be included in other templates.
 </div>
 ```
 
-### public/
+#### public/
 
 All files in the `public` folder are served as static files.
 
