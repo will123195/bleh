@@ -1,5 +1,7 @@
 # bleh
 
+[![Build Status](https://travis-ci.org/will123195/bleh.svg)](https://travis-ci.org/will123195/bleh)
+
 A web framework using Browserify + Less + Express + Handlebars.
 
 [![bleh](bleh.gif)](https://github.com/will123195/bleh)
