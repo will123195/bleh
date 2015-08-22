@@ -1,22 +1,14 @@
 var xtend = require('xtend')
-var hello = require('./hello')
 
-console.log('home.browserify.js')
-
-var test = xtend({
+var data = xtend({
   a: 1
 }, {
   b: 2
 })
 
-console.log('test:', test)
+console.log('data:', data)
 
-hello()
-hello()
-
-var html = render('partials/header', {
-  title: 'render test!'
-})
+var html = render('partials/dump', data)
 
 document.getElementById('client-render').innerHtml = html
 
