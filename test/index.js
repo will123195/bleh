@@ -22,7 +22,7 @@ test('start server', function (t) {
 })
 
 test('url params', function (t) {
-  get('/1-2', function (err, res) {
+  get('/1-2.json', function (err, res) {
     t.error(err)
     t.equal(res.statusCode, 200)
     try {
