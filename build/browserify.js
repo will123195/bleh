@@ -54,9 +54,10 @@ module.exports = function (opts, cb) {
   })
 
   function saveBrowserify (file) {
-    var view = file.name.replace('.browserify.js', '')
-    view = getViewName({
-      name: view
+    var view = getViewName({
+      name: file.filename,
+      root: root,
+      ext: '.browserify.js'
     })
     var filename = root + '/' + dist + '/' + view + '.js'
     var b = browserify()

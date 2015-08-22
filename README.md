@@ -171,7 +171,7 @@ bleh({
 
 ## Controllers
 
-The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder.
+The [build](#build) automatically creates routes for `.node.js` files (controllers) that exist in the [`pages/`](#pages) folder.
 
 For example:
 
