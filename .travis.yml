@@ -2,5 +2,6 @@ language: node_js
 node_js:
   - "0.10"
 install:
+  - npm install
   - ln -s node_modules/.bin sample-app/node_modules/.bin
   - ln -s node_modules/bleh .
