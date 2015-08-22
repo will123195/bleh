@@ -13,8 +13,10 @@ module.exports = function (opts, cb) {
   var dist = 'public/dist'
 
   var paths = [
-    root,
-    root + '/node_modules/bleh/shared'
+    path.join(root, 'partials'),
+    path.join(root, 'layouts'),
+    path.join(root, 'pages'),
+    path.join(root, 'node_modules/bleh/shared/layouts')
   ]
 
   var package = require(root + '/package.json')

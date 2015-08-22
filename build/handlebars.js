@@ -22,18 +22,25 @@ module.exports = function (options, cb) {
     dist: 'public/dist'
   }
   var opts = xtend(defaults, options)
-  //console.log('opts:', opts)
+
+  // remove non-existent folders to prevent handlebars error
+
+  var paths = ''
+  opts.paths.forEach(function (p, i) {
+    if (fs.existsSync(p)) {
+      paths += p + ' '
+    }
+  })
 
   var templates = {}
   var dir = path.join(root, opts.dist)
   mkdirp.sync(dir)
-  var paths = opts.paths.join(' ')
 
   async.waterfall([
     function (next) {
       var command = [
         opts.handlebars,
-        opts.paths.join(' '),
+        paths,
         '-e html',
         '-r ' + root
       ].join(' ')
