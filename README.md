@@ -21,25 +21,26 @@ npm install -s bleh browserify less express handlebars
 
 ## Usage
 
-#### index.js
+#### server.js
 ```js
 var bleh = require('bleh')
-
 var app = bleh()
-app.set('port', (process.env.PORT || 5000))
-
-app.listen(app.get('port'), function () {
-  console.log([
-    'My App',
-    'Running: http://localhost:' + app.get('port'),
-    'NODE_ENV: ' + process.env.NODE_ENV,
-  ].join('\n'))
+var port = process.env.PORT || 8080
+app.on('ready', function () {
+  app.listen(port, function () {
+    console.log([
+      'My App',
+      'Running: http://localhost:' + port,
+      'NODE_ENV: ' + process.env.NODE_ENV,
+    ].join('\n'))
+  })
 })
 ```
 
-#### File structure
+## File structure
 
 ```
+├─ layouts/
 ├─ node_modules/
 ├─ pages/
 │  ├─ home/
@@ -49,28 +50,63 @@ app.listen(app.get('port'), function () {
 │  │  └─ home.html
 │  └─ $name/
 │     └─ $name.node.js
+├─ partials/
 ├─ public/
 │  ├─ dist/
 │  └─ robots.txt
-├─ index.js
+├─ server.js
 └─ package.json
 ```
 
 See also the [sample app](test/sample-app).
 
+### pages/
+
+Routes are generated automatically based on the `pages/` folder structure. Each page needs a controller (`.node.js` file) and pages normally have `.html`, `.less` and `.browserify.js` files.
+
+The page's corresponding `js` and `css` files are linked onto the html of the page automatically if the page is using the `html5` layout.
+
+### layouts/
+
+Layouts can be used by pages or other layouts with the `layout` method. Layouts are just like pages except layout templates have a `{{{main}}}` expression. Also unlike pages, layouts do not generate routes.
+
+```js
+module.exports = function () {
+  this.title = 'My title'
+  this.layout('html5')
+  this.render()
+}
+```
+
+### partials/
+
+Partials can be included in other templates.
+
+```html
+<div>
+  {{> partials/hello}}
+</div>
+```
+
+### public/
+
+All files in the `public` folder are served as static files.
+
 ## Build
 
-The build happens automatically at runtime, except in the `production` environment. Production-ready files are created in the `public/dist/` folder by default.
+Production-ready files get created at runtime in the `public/dist/` folder by default. The app's `ready` event fires when the build is complete.
 
-In the `production` environment, it is assumed that `public/dist/` has already been generated so there is no brief delay starting the app.
+However, in the `production` environment, it is assumed that the `dist` files have already been generated and the `ready` event fires immediately so there is no brief delay starting the app.
 
-While developing, it's useful to run the app with a watch script like this to restart the app when any source file changes:
+While developing, it's useful to run the app with a watch script to restart the app when any source file changes, for example:
 
 ```
 nodemon -e js,html,css,less,json,txt --ignore public/dist/
 ```
 
-You may choose to *gitignore* `public/dist/` to prevent extra diffs in your commits. In this case you should add `"postinstall": "bleh build"` to your `package.json` to ensure your app is built after install, i.e. when deployed to production.
+You can also run `bleh build` on the command line to build the production-ready `dist` files.
+
+You may choose to gitignore `public/dist/` to prevent extra diffs in your commits. In this case you need to run `bleh build` prior to deploying your app to production (or add `"postinstall": "bleh build"` to your `package.json`).
 
 ## Options
 
@@ -78,7 +114,7 @@ You may choose to *gitignore* `public/dist/` to prevent extra diffs in your comm
 var app = bleh({
   // default options
   helpers: {},
-  home: 'home',
+  home: '/home',
   https: false,
   log: console.log,
   root: __dirname,
@@ -88,19 +124,23 @@ var app = bleh({
 
 ### helpers
 
-
+The `helpers` object gets merged into the context of the controller. See [pages](#pages).
 
 ### home
 
+The page uri to be used as the homepage. By default, `/home` redirects to `/`.
 
 ### https
 
+This option forces a redirect to `https` only in production.
 
 ### log
 
+Defaults to `console.log`.
 
 ### root
 
+The path to the root folder of your app should contain the above [file structure](#file-structure). Defaults to the current file's diractory.
 
 ### sessions
 

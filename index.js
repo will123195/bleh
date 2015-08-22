@@ -57,7 +57,7 @@ bleh.prototype.start = function (options) {
     https: true,
     log: console.log,
     root: this.root,
-    home: 'home'
+    home: '/home'
   }
   var opts = xtend(defaults, options)
 
