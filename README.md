@@ -58,7 +58,7 @@ app.on('ready', function () {
 └─ package.json
 ```
 
-See also the [sample app](test/sample-app).
+See also the [sample app](sample-app).
 
 ### pages/
 
