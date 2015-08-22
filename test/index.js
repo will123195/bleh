@@ -4,7 +4,6 @@ var http = require('http')
 
 var app = require('../sample-app')
 var port = 5555
-app.set('port', port)
 var server = http.createServer(app);
 
 var get = function (uri, cb) {
