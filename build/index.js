@@ -1,5 +1,4 @@
 var path = require('path')
-var clone = require('clone')
 var async = require('async')
 var xtend = require('xtend')
 var chalk = require('chalk')

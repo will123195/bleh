@@ -17,6 +17,21 @@
     "url": "https://github.com/will123195/bleh/issues"
   },
   "homepage": "https://github.com/will123195/bleh#readme",
+  "keywords": [
+    "framework",
+    "microframework",
+    "browserify",
+    "less",
+    "express",
+    "handlebars",
+    "mean",
+    "sails",
+    "hapi",
+    "locomotive",
+    "flatiron",
+    "derby",
+    "meteor"
+  ],
   "devDependencies": {
     "browserify": "^11.0.1",
     "express": "^4.13.3",
@@ -32,10 +47,8 @@
     "body-parser": "^1.13.1",
     "chalk": "^1.1.0",
     "client-sessions": "^0.7.0",
-    "clone": "^1.0.2",
     "commander": "^2.8.1",
     "debug": "^2.2.0",
-    "express-page": "0.0.3",
     "hide-property": "0.0.1",
     "md5": "^2.0.0",
     "mkdirp": "^0.5.1",
