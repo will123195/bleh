@@ -86,19 +86,19 @@ All files in the `public` folder are served as static files.
 
 ## Build
 
-Production-ready files get created at runtime in the `public/dist/` folder by default. The app's `ready` event fires when the build is complete.
+The build process generates the `public/dist/` folder containing the `js` and `css` for your app.
 
-However, in the `production` environment, it is assumed that the `dist` files have already been generated and the `ready` event fires immediately so there is no brief delay starting the app.
+The build is generated at runtime (except in `production`) and the app's `ready` event fires when the build is complete.
 
-While developing, it's useful to run the app with a watch script to restart the app when any source file changes, for example:
+In the `production` environment, the build step is skipped and the `ready` event fires immediately to avoid a brief delay starting the app.
+
+If you choose not to commit your `public/dist/` to version control, then you need to run `bleh build` on the command line prior to deploying your app to production (or add `"postinstall": "bleh build"` to your `package.json`).
+
+While developing, it's useful to run the app with a watch script to restart the app when any source file changes (which automatically rebuilds). For example:
 
 ```
 nodemon -e js,html,css,less,json,txt --ignore public/dist/
 ```
-
-You can also run `bleh build` on the command line to build the production-ready `dist` files.
-
-You may choose to gitignore `public/dist/` to prevent extra diffs in your commits. In this case you need to run `bleh build` prior to deploying your app to production (or add `"postinstall": "bleh build"` to your `package.json`).
 
 ## Options
 
@@ -118,7 +118,7 @@ var app = bleh({
 
 #### helpers
 
-The `helpers` object gets merged into the context of the controller. See [pages](#pages).
+The `helpers` object gets merged into the context of the [controller](#controllers).
 
 #### home
 
@@ -152,7 +152,7 @@ bleh({
 
 ### Examples
 
-The [build](#build) automatically creates routes for `.node.js` files that exist in the `pages/` folder.
+The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder.
 
 #### pages/beep.json.node.js
 
@@ -193,7 +193,7 @@ module.exports = function () {
 
 #### layouts/website/website.node.js
 
-Each layout has a controller that runs when the [layout](#layout) method is invoked. Bleh provides a generic [`html5`](shared/layouts/html5) layout that does the `css` and `js` magic.
+Each layout has a controller that runs when the [layout](#layout) method is invoked. *Bleh* provides a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` to the page.
 
 ```js
 module.exports = function ($) {
