@@ -160,14 +160,11 @@ bleh({
 
 ## Controllers
 
-### Examples
-
 The [build](#build) automatically creates routes for `.node.js` files that exist in the [`pages/`](#pages) folder.
 
 #### pages/beep.json.node.js
-
+uri: `/beep.json`
 ```js
-// uri: /beep.json
 module.exports = function () {
   this.send({
     beep: 'boop'
@@ -176,25 +173,22 @@ module.exports = function () {
 ```
 
 #### pages/hello/hello.node.js
-
+uri: `/hello`
 ```js
-// uri: /hello
 module.exports = function ($) {
-  // set data to be rendered
-  $.title = 'Hello'
+  $.title = 'Hello' // set data to be rendered
   // add additional css or js to the page
   $.css.push('//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
-  // specify the layout and run it's controller
-  $.layout('website')
-  // send the rendered html
-  $.render()
+  $.layout('website') // specify the layout and call its controller function
+  $.render() // send the rendered html
 }
 ```
 
 #### pages/$user/$user.node.js
 
+`$` followed by a word indicates a [url param](http://expressjs.com/api.html#app.param).
+uri: `/will123195`
 ```js
-// uri: /will123195
 module.exports = function () {
   console.log(this.$user) // will123195
   this.render()
@@ -203,12 +197,12 @@ module.exports = function () {
 
 #### layouts/website/website.node.js
 
-Each layout has a controller that runs when the [layout](#layout) method is invoked. *Bleh* provides a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` to the page.
+Each layout has a controller that runs when the [`layout`](#layout) method is invoked. Bleh comes with a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` onto the page.
 
 ```js
 module.exports = function ($) {
   $.now = Date.now()  // set data for all pages using this layout
-  $.layout('html5')   // html5 boilerplate + autolink css & js
+  $.layout('html5')   // html5 boilerplate + link css & js
 }
 ```
 
