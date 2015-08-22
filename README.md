@@ -62,25 +62,13 @@ See also the [sample app](sample-app).
 
 ### pages/
 
-Routes are generated automatically based on the `pages/` folder structure. Each page needs a controller (`.node.js` file) and pages normally have `.html`, `.less` and `.browserify.js` files.
+Routes are generated automatically based on the `pages/` folder structure. Each page has a [controller](#controllers) (`.node.js` file) and pages normally have `.html`, `.less` and `.browserify.js` files located together in that page's folder.
 
-The page's corresponding `js` and `css` files are linked onto the html of the page automatically if the page is using the `html5` layout.
-
-Each page and layout has a `.node.js` controller.
-
-```js
-module.exports = function () {
-  this.title = 'My title'
-  this.layout('html5')
-  this.render()
-}
-```
-
-Helpers that are set in the [options](#options) are available in `this` context of the controllers.
+The page's corresponding `js` and `css` are linked onto the html of the page automatically if the page is using the `html5` layout.
 
 ### layouts/
 
-Layouts can be used by pages or other layouts with the `layout()` method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression. Also unlike pages, layouts do not generate routes.
+Layouts can be invoked by pages or other layouts with the [`layout`](#layout) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. Also, unlike pages, layouts do not generate routes.
 
 ### partials/
 
@@ -128,27 +116,27 @@ var app = bleh({
 })
 ```
 
-### helpers
+#### helpers
 
 The `helpers` object gets merged into the context of the controller. See [pages](#pages).
 
-### home
+#### home
 
 The page uri to be used as the homepage. By default, `/home` redirects to `/`.
 
-### https
+#### https
 
 This option forces a redirect to `https` only in production.
 
-### log
+#### log
 
 Defaults to `console.log`.
 
-### root
+#### root
 
 The path to the root folder of your app should contain the above [file structure](#file-structure).
 
-### sessions
+#### sessions
 
 Specify a secret for encrypting cookie-based session data. If you change this key all user sessions will be erased (all users will get logged out).
 
@@ -159,3 +147,80 @@ bleh({
   }
 })
 ```
+
+## Controllers
+
+### Examples
+
+The [build](#build) automatically creates routes for `.node.js` files that exist in the `pages/` folder.
+
+#### pages/beep.json.node.js
+
+```js
+// uri: /beep.json
+module.exports = function () {
+  this.send({
+    beep: 'boop'
+  })
+}
+```
+
+#### pages/hello/hello.node.js
+
+```js
+// uri: /hello
+module.exports = function ($) {
+  // set data to be rendered
+  $.title = 'Hello'
+  // add additional css or js to the page
+  $.css.push('//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+  // specify the layout and run it's controller
+  $.layout('website')
+  // send the rendered html
+  $.render()
+}
+```
+
+#### pages/$user/$user.node.js
+
+```js
+// uri: /will123195
+module.exports = function () {
+  console.log(this.$user) // will123195
+  this.render()
+}
+```
+
+#### layouts/website/website.node.js
+
+Each layout has a controller that runs when the [layout](#layout) method is invoked. Bleh provides a generic [`html5`](shared/layouts/html5) layout that does the `css` and `js` magic.
+
+```js
+module.exports = function ($) {
+  $.now = Date.now()  // set data needed for all pages using this layout
+  $.layout('html5')   // html5 boilerplate + autolink css & js
+}
+```
+
+### Default helpers
+
+- [`accessDenied()`](#accessDenied)
+- [`body`](#body)
+- ['error(err)`](#error)
+- ['get(fn)`](#get)
+- ['layout(name)`](#layout)
+- ['notFound()`](#notFound)
+- ['post(fn)`](#post)
+- ['query`](#query)
+- ['redirect([301|302], uri)`](#redirect)
+- ['render()`](#render)
+- ['req`](#req)
+- ['res`](#res)
+- ['send(obj|str)`](#send)
+- ['session`](#session)
+- ['set(helpers)`](#set)
+- ['view(name)`](#view)
+
+Any additional `helpers` specified in the [options](#options) are also available in all controllers.
+
+Note: `req` and `res` are hidden for convenience so you can `console.log(this)` without so much noise.
