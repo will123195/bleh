@@ -3,16 +3,25 @@
 <dl>
   <dt>now:</dt>
   <dd>{{now}}</dd>
+  <dt>counter:</dt>
+  <dd>{{session.counter}}</dd>
 </dl>
 
 <div>
-  {{> partials/dump}}
+  {{#times query.cats}}
+    {{> partials/kitten}}
+  {{/times}}
+</div>
+<div>
+  <a href="?cats={{anotherCat}}">add another cat</a>
 </div>
 
 <div>
-  {{> partials/kitten}}
+  client-side render:
+  <div id="client-render"></div>
 </div>
 
-<div id="client-render">
-
+<div>
+  controller context:
+  {{> partials/dump}}
 </div>

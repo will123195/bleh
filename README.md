@@ -197,7 +197,7 @@ module.exports = function ($) {
 
 ##### pages/$user/$user.node.js
 
-`$` followed by a word indicates a [url param](http://expressjs.com/api.html#app.param).
+Using `$` in the name of your page indicates a [url param](http://expressjs.com/api.html#app.param).
 ```js
 // uri: /will123195
 module.exports = function () {

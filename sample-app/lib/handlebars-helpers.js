@@ -6,5 +6,13 @@ module.exports = function (Handlebars) {
     )
   })
 
+  Handlebars.registerHelper('times', function (n, block) {
+    var html = '';
+    for (var i = 0; i < n; ++i) {
+      html += block.fn(i)
+    }
+    return html
+  });
+
   return Handlebars
 }

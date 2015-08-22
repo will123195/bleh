@@ -6,9 +6,7 @@ var data = xtend({
   b: 2
 })
 
-console.log('data:', data)
-
 var html = render('partials/dump', data)
 
-document.getElementById('client-render').innerHtml = html
+document.getElementById('client-render').innerHTML = html
 

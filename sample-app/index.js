@@ -1,6 +1,6 @@
 var bleh = require('..')
 var app = bleh({
-  session: {
+  sessions: {
     secret: 'some unique random key with plenty of entropy'
   }
 })

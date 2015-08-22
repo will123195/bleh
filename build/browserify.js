@@ -25,18 +25,25 @@ module.exports = function (opts, cb) {
   var filename = path.join(root, commonUri)
   var b = browserify()
   b.require(commonDependencies)
+  b.require(root + '/public/dist/templates.js', {
+    expose: 'handlebars-templates'
+  })
+  b.require(root + '/lib/handlebars-helpers.js', {
+    expose: 'handlebars-helpers'
+  })
   b.bundle(function(err, buf) {
     if (err) throw new Error(err)
     write(filename, buf)
-  })
 
-  async.each(paths, function (dir, done) {
-    scan({
-      root: dir
-    })
-    .file('**/*browserify.js', saveBrowserify)
-    .done(done)
-  }, cb)
+    async.each(paths, function (dir, done) {
+      scan({
+        root: dir
+      })
+      .file('**/*browserify.js', saveBrowserify)
+      .done(done)
+    }, cb)
+
+  })
 
   function saveBrowserify (file) {
     var view = file.name.replace('.browserify.js', '')
@@ -46,7 +53,10 @@ module.exports = function (opts, cb) {
     var filename = root + '/' + dist + '/' + view + '.js'
     var b = browserify()
     b.add(file.filename)
-    b.external(commonDependencies)
+    b.external(commonDependencies.concat([
+      'handlebars-templates',
+      'handlebars-helpers'
+    ]))
     b.bundle(function(err, buf) {
       if (err) throw new Error(err)
       write(filename, buf)

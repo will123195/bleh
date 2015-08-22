@@ -35,21 +35,20 @@ module.exports = function (options, cb) {
     debug('verbose!')
   }
 
-  // TODO: async.auto (browserify html5 needs templates.js)
-  async.parallel([
-    function (done) {
-      handlebars(opts, done)
-    },
-    function (done) {
+  async.auto({
+    browserify: ['handlebars', function (done) {
       browserify(opts, done)
-    },
-    function (done) {
+    }],
+    less: function (done) {
       less(opts, done)
     },
-    function (done) {
+    express: function (done) {
       express(opts, done)
+    },
+    handlebars: function (done) {
+      handlebars(opts, done)
     }
-  ], function (err) {
+  }, function (err) {
     if (err) {
       console.log('bleh build error:', err)
       cb(err)
