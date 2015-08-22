@@ -25,7 +25,16 @@ module.exports = function (opts, cb) {
         ext: '.node.js',
         root: root
       })
-      controllers[name] = file.filename.replace(root + '/', '')
+      controllers[name] = {
+        path: file.filename.replace(root + '/', '')
+      }
+      var base = file.filename.replace('.node.js', '')
+      if (fs.existsSync(base + '.less')) {
+        controllers[name].css = true
+      }
+      if (fs.existsSync(base + '.browserify.js')) {
+        controllers[name].js = true
+      }
     })
     .done(next)
   }, function () {
