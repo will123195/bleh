@@ -152,7 +152,7 @@ The path to the root folder of your app should contain the above [file structure
 
 Specify a secret for encrypting cookie-based session data. If you change this key all user sessions will be erased (all users will get logged out).
 
-```
+```js
 bleh({
   sessions: {
     secret: 'my secret key'
