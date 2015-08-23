@@ -9,7 +9,7 @@ A web framework using Browserify + Less + Express + Handlebars.
 - **Browserify** is automatic
 - **Less** compilation is automatic
 - **Express** routing is automatic
-- **Handlebars** precompilation is automatic for server and browser
+- **Handlebars** precompilation is automatic for both server and browser
 - Serves static files
 - Secure cookie-based sessions
 
@@ -219,27 +219,28 @@ module.exports = function ($) {
   $.layout('html5')   // html5 boilerplate + link css & js
 }
 ```
-Each layout has a controller that runs when the [`layout`](#layout) method is invoked. Bleh comes with a generic [`html5`](shared/layouts/html5) layout that magically links the `css` and `js` onto the page.
+Each layout has a controller that runs when the [`layout`](#layout) method is invoked. A generic [`html5`](shared/layouts/html5) layout is provided that magically links the corresponding `css` and `js` onto the page if invoked.
 
-### Default helpers
+#### Controller helpers
 
-- [`accessDenied()`](#accessDenied)
-- [`body`](#body)
-- [`error(err)`](#error)
-- [`get(fn)`](#get)
-- [`layout(name)`](#layout)
-- [`notFound()`](#notFound)
-- [`post(fn)`](#post)
-- [`query`](#query)
-- [`redirect([301|302], uri)`](#redirect)
-- [`render()`](#render)
-- [`req`](#req)
-- [`res`](#res)
-- [`send(obj|str)`](#send)
-- [`session`](#session)
-- [`set(helpers)`](#set)
-- [`view(name)`](#view)
+- [`accessDenied()`](#accessDenied) - sends 403 response
+- [`body`](#body) - the request body (i.e. POST data)
+- [`error(err)`](#error) - sends 400 response
+- [`get(fn)`](#get) - calls `fn` if request method is GET
+- [`layout(name)`](#layout) - invokes a layout
+- [`notFound()`](#notFound) - sends 404 response
+- [`post(fn)`](#post) - calls `fn` if request method is POST
+- [`query`](#query) - the parsed querystring
+- [`redirect([301|302], uri)`](#redirect) - sends redirect response
+- [`render()`](#render) - sends rendered html
+- [`req`](#req) - the http request object
+- [`res`](#res) - the http response object
+- [`send(obj|str)`](#send) - sends a text or json response
+- [`session`](#session) - the values encrypted in a cookie
+- [`set(helpers)`](#set) - merges new properties into this context
+- [`templates`](#templates) - the array of precompiled template functions
+- [`view(name)`](#view) - changes the default template to be `render()`ed
 
-Any additional `helpers` specified in the [options](#options) are also available in all controllers.
+Additional `helpers` specified in the [options](#options) are merged into the controllers' context. For example, adding your `db` as a helper will make it easily accessible in all controllers.
 
-Note: `req` and `res` are hidden for convenience so you can `console.log(this)` without so much noise.
+Note: `req`, `res` and `templates` are hidden for convenience so you can `console.log(this)` without so much noise.
