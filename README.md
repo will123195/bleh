@@ -16,7 +16,7 @@ A web framework using Browserify + Less + Express + Handlebars.
 ## Install
 
 ```
-npm install -s bleh browserify less express handlebars
+npm install --save bleh browserify less express handlebars
 ```
 
 ## Usage
