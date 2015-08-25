@@ -26,7 +26,7 @@ npm install -g bleh
 mkdir my-app
 cd my-app
 npm init
-bleh init --jquery --fontawesome
+bleh init --jquery
 npm start
 ```
 

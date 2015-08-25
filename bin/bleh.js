@@ -22,7 +22,7 @@ opts.build = program.command('build')
 
 opts.init = program.command('init')
   .option('--jquery')
-  .option('--fontawesome')
+  .option('--font-awesome')
   .description('initialize a new web app')
   .action(function () {
     init(opts.init)
