@@ -1,6 +1,6 @@
-var xtend = require('xtend')
+var merge = require('deepmerge')
 
-var data = xtend({
+var data = merge({
   a: 1
 }, {
   b: 2

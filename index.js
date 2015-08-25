@@ -1,17 +1,11 @@
-try {
-  var express = require('express')
-} catch (err) {
-  // in case you have this module npm linked
-  var prequire = require('parent-require')
-  var express = prequire('express')
-}
-var xtend = require('xtend')
+var express = require('express')
+var merge = require('deepmerge')
 var path = require('path')
 var obj = require('object-path')
 var sessions = require('client-sessions')
 var bodyParser = require('body-parser')
 
-var build = require('./build')
+var build = require('./lib/build')
 var routes = require('./lib/routes')
 
 var bleh = module.exports = function bleh (options) {
@@ -59,7 +53,7 @@ bleh.prototype.start = function (options) {
     root: this.root,
     home: '/home'
   }
-  var opts = xtend(defaults, options)
+  var opts = merge(defaults, options)
 
   var reqPath = path.dirname(module.parent.filename)
 

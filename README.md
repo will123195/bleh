@@ -19,6 +19,17 @@ A web framework using Browserify + Less + Express + Handlebars.
 npm install --save bleh browserify less express handlebars
 ```
 
+## Quick start
+
+```
+npm install -g bleh
+mkdir my-app
+cd my-app
+npm init
+bleh init --jquery --fontawesome
+npm start
+```
+
 ## Usage
 
 #### server.js
