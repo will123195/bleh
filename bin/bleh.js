@@ -4,9 +4,6 @@ var program = require('commander')
 var package = require('../package.json')
 var chalk = require('chalk')
 var merge = require('deepmerge')
-var build = require('../lib/build')
-var init = require('../lib/init')
-var page = require('../lib/page')
 
 program.version(package.version)
 
@@ -16,6 +13,7 @@ opts.build = program.command('build')
   .option('-v --verbose')
   .description('build the dist files')
   .action(function () {
+    var build = require('../lib/build')
     build(merge(opts.build, {
       cli: true
     }))
@@ -26,12 +24,14 @@ opts.init = program.command('init')
   .option('--font-awesome')
   .description('initialize a new web app')
   .action(function () {
+    var init = require('../lib/init')
     init(opts.init)
   })
 
 opts.page = program.command('page <name>')
   .description('create a blank page')
   .action(function (name) {
+    var page = require('../lib/page')
     page(merge(opts.page, {
       name: name
     }))

@@ -103,7 +103,7 @@ The build is generated at runtime (except in `production`) and the app's `ready`
 
 In the `production` environment, the build step is skipped and the `ready` event fires immediately to avoid a brief delay starting the app.
 
-If you choose not to commit your `public/dist/` to version control, then you need to run `bleh build` on the command line prior to deploying your app to production (or add `"postinstall": "bleh build"` to your `package.json`).
+If you choose not to commit your `public/dist/` to version control, then you need to run `bleh build` prior to deploying your app to production (i.e. add `"postinstall": "bleh build"` to your `package.json`).
 
 While developing, it's useful to run the app with a watch script to restart the app when any source file changes (which automatically rebuilds). For example:
 
