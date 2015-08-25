@@ -26,13 +26,12 @@ npm install -g bleh
 mkdir my-app
 cd my-app
 npm init
-bleh init --jquery
+bleh init
 npm start
 ```
 
 ## Usage
 
-#### server.js
 ```js
 var bleh = require('bleh')
 var app = bleh()
@@ -150,41 +149,16 @@ var app = bleh({
   https: false,
   log: console.log,
   root: __dirname,
-  sessions: false
+  sessions: false // {secret: 'My EncRypT10n k3Y'}
 })
 ```
 
-#### helpers
-
-The `helpers` object gets merged into the context of the [controller](#controllers).
-
-#### home
-
-The page uri to be used as the homepage. By default, `/home` redirects to `/`.
-
-#### https
-
-This option forces a redirect to `https` only in production.
-
-#### log
-
-Defaults to `console.log`.
-
-#### root
-
-The path to the root folder of your app should contain the above [file structure](#file-structure).
-
-#### sessions
-
-Specify a secret for encrypting cookie-based session data. If you change this key all user sessions will be erased (all users will get logged out).
-
-```js
-bleh({
-  sessions: {
-    secret: 'my secret key'
-  }
-})
-```
+- **helpers** - This object gets merged into the context of the [controller](#controllers).
+- **home** - The page (uri) to be used as the homepage. By default, `/home` redirects to `/`.
+- **https** - This option forces a redirect to `https` only in production.
+- **log** - The function for log output. Defaults to `console.log`.
+- **root** - The path to the root folder of your app contains the above [file structure](#file-structure).
+- **sessions** - Configuration for cookie-based sessions. To enable sessions, this object needs a property called `secret`.
 
 ## Controllers
 
