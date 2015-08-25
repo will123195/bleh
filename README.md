@@ -131,7 +131,7 @@ Your handlebars helpers will work on both the server and client if you specify t
 
 For example: [`handlebars-helpers.js`](sample-app/lib/handlebars-helpers.js)
 
-Also, if you're using the `html5` layout, a global `render()` function is available to render any of your `.html` templates on the client.
+Also, if you're using the `html5` layout, you can use `window.render()`  to render any of your `.html` templates on the client side. You can see the templates you have available with `console.log(Handlebars.templates)`.
 
 ```js
 var html = render('partials/hello', data)
@@ -157,7 +157,7 @@ var app = bleh({
 - **home** - The page (uri) to be used as the homepage. By default, `/home` redirects to `/`.
 - **https** - This option forces a redirect to `https` only in production.
 - **log** - The function for log output. Defaults to `console.log`.
-- **root** - The path to the root folder of your app contains the above [file structure](#file-structure).
+- **root** - The path to the root folder of your app (which contains the above [file structure](#file-structure)).
 - **sessions** - Configuration for cookie-based sessions. To enable sessions, this object needs a property called `secret`.
 
 ## Controllers
