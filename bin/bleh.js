@@ -6,6 +6,7 @@ var chalk = require('chalk')
 var merge = require('deepmerge')
 var build = require('../lib/build')
 var init = require('../lib/init')
+var page = require('../lib/page')
 
 program.version(package.version)
 
@@ -26,6 +27,14 @@ opts.init = program.command('init')
   .description('initialize a new web app')
   .action(function () {
     init(opts.init)
+  })
+
+opts.page = program.command('page <name>')
+  .description('create a blank page')
+  .action(function (name) {
+    page(merge(opts.page, {
+      name: name
+    }))
   })
 
 program.command('*')
