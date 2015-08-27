@@ -1,18 +1,44 @@
 var test = require('tape')
 var request = require('request')
 var http = require('http')
+var path = require('path')
+var fs = require('fs')
 
 var app = require('../sample-app')
 var port = 5555
 var server = http.createServer(app);
 
 var get = function (uri, cb) {
-  var url = 'http://localhost' + ':' + port + uri
+  var url = 'http://localhost:' + port + uri
   request.get({
     url: url,
     followRedirect: false
   }, cb)
 }
+
+test('ensure sample-app symlinks exist', function (t) {
+  var src = path.join(__dirname, '..', 'sample-app', 'node_modules')
+  var links = [
+    {
+      src: path.join(src, '.bin'),
+      target: path.join('..', '..', 'node_modules', '.bin')
+    },
+    {
+      src: path.join(src, 'bleh'),
+      target: path.join('..', '..')
+    },
+    {
+      src: path.join(src, 'handlebars'),
+      target: path.join('..', '..', 'node_modules', 'handelbars')
+    }
+  ]
+  links.forEach(function (link) {
+    try {
+      fs.symlinkSync(link.target, link.src, 'dir')
+    } catch (err) {}
+  })
+  t.end()
+})
 
 test('start server', function (t) {
   app.on('ready', function () {

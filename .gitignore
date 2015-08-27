@@ -1,4 +1,4 @@
 node_modules
 sample-app/public/dist/*
-!sample-app/node_modules/*
+!sample-app/node_modules
 .DS_Store
