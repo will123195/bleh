@@ -3,10 +3,13 @@ var request = require('request')
 var http = require('http')
 var path = require('path')
 var fs = require('fs')
+var mkdirp = require('mkdirp')
+var rimraf = require('rimraf')
 
-var app = require('../sample-app')
+var server
 var port = 5555
-var server = http.createServer(app);
+var src = path.join(__dirname, '..', 'sample-app', 'node_modules')
+var dist = path.join(__dirname, '..', 'sample-app', 'public', 'dist')
 
 var get = function (uri, cb) {
   var url = 'http://localhost:' + port + uri
@@ -16,8 +19,14 @@ var get = function (uri, cb) {
   }, cb)
 }
 
+test('clean', function (t) {
+  rimraf.sync(src)
+  rimraf.sync(dist)
+  t.end()
+})
+
 test('ensure sample-app symlinks exist', function (t) {
-  var src = path.join(__dirname, '..', 'sample-app', 'node_modules')
+  mkdirp.sync(src)
   var links = [
     {
       src: path.join(src, '.bin'),
@@ -29,7 +38,7 @@ test('ensure sample-app symlinks exist', function (t) {
     },
     {
       src: path.join(src, 'handlebars'),
-      target: path.join('..', '..', 'node_modules', 'handelbars')
+      target: path.join('..', '..', 'node_modules', 'handlebars')
     }
   ]
   links.forEach(function (link) {
@@ -41,6 +50,8 @@ test('ensure sample-app symlinks exist', function (t) {
 })
 
 test('start server', function (t) {
+  var app = require('../sample-app')
+  server = http.createServer(app);
   app.on('ready', function () {
     server.listen(port, t.end.bind(t))
   })
