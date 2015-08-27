@@ -100,7 +100,7 @@ bleh.prototype.start = function (options) {
   app.static = function (uri, path) {
     app.use(uri, express.static(path))
   }
-  app.static('/', reqPath + '/public')
+  app.static('/', path.join(reqPath, 'public'))
 
   // routes
   app.use('/', routes(opts))

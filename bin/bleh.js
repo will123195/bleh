@@ -20,8 +20,8 @@ opts.build = program.command('build')
   })
 
 opts.init = program.command('init')
-  .option('--jquery')
-  .option('--font-awesome')
+  .option('--jquery', 'add jquery cdn to website layout')
+  .option('--font-awesome', 'add font-awesome cdn to website layout')
   .description('initialize a new web app')
   .action(function () {
     var init = require('../lib/init')

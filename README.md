@@ -26,6 +26,7 @@ npm install -g bleh
 mkdir my-app
 cd my-app
 npm init
+bleh init --help
 bleh init
 npm start
 ```
