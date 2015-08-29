@@ -77,15 +77,15 @@ Routes are generated automatically based on the `pages/` folder structure. Each 
 
 The page's corresponding `js` and `css` are linked onto the html of the page automatically if the page is using the `html5` layout.
 
-Words beginning with `$` in the page name are "wildcard" url params. [example](#pagesuserusernodejs)
+Words beginning with `$` in the page name are "wildcard" url params. See [example](#pagesuserusernodejs).
 
 #### layouts/
 
-Layouts can be invoked by pages or other layouts with the [`layout`](#layout) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. Also, unlike pages, layouts do not generate routes.
+Layouts can be invoked by pages (or other layouts) with the [`layout`](#controller-helpers) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. And unlike pages, the build does not generate routes for layouts.
 
 #### partials/
 
-Partials can be included in other templates.
+Partials can be included in other templates. Partials have neither `js`, `css`, nor a route (url) associated with them.
 
 ```html
 <div>
@@ -137,7 +137,7 @@ For example: [`handlebars-helpers.js`](sample-app/lib/handlebars-helpers.js)
 Also, if you're using the `html5` layout, you can use `window.render()`  to render any of your `.html` templates on the client side. You can see the templates you have available with `console.log(Handlebars.templates)`.
 
 ```js
-var html = render('partials/hello', data)
+var html = window.render('partials/hello', data)
 ```
 
 ## Options
@@ -160,8 +160,8 @@ var app = bleh({
 - **home** - The page (uri) to be used as the homepage. By default, `/home` redirects to `/`.
 - **https** - This option forces a redirect to `https` only in production.
 - **log** - The function for log output. Defaults to `console.log`.
-- **root** - The path to the root folder of your app (which contains the above [file structure](#file-structure)).
-- **sessions** - Configuration for cookie-based sessions. To enable sessions, this object needs a property called `secret`.
+- **root** - The path to the root folder of your app (which contains `pages/`). See [file structure](#file-structure).
+- **sessions** - Configuration for cookie-based sessions. To enable sessions, you need a `secret` value. See [client-sessions](https://www.npmjs.com/package/client-sessions).
 
 ## Controllers
 
@@ -209,26 +209,26 @@ module.exports = function ($) {
 ```
 Each layout has a controller that runs when the [`layout`](#layout) method is invoked. A generic [`html5`](shared/layouts/html5) layout is provided that magically links the corresponding `css` and `js` onto the page if invoked.
 
-#### Controller helpers
+#### Controller methods
 
-- [`accessDenied()`](#accessDenied) - sends 403 response
-- [`body`](#body) - the request body (i.e. POST data)
-- [`error(err)`](#error) - sends 400 response
-- [`get(fn)`](#get) - calls `fn` if request method is GET
-- [`layout(name)`](#layout) - invokes a layout
-- [`notFound()`](#notFound) - sends 404 response
-- [`post(fn)`](#post) - calls `fn` if request method is POST
-- [`query`](#query) - the parsed querystring
-- [`redirect([301|302], uri)`](#redirect) - sends redirect response
-- [`render()`](#render) - sends rendered html
-- [`req`](#req) - the http request object
-- [`res`](#res) - the http response object
-- [`send(obj|str)`](#send) - sends a text or json response
-- [`session`](#session) - the values encrypted in a cookie
-- [`set(helpers)`](#set) - merges new properties into this context
-- [`templates`](#templates) - the array of precompiled template functions
-- [`view(name)`](#view) - changes the default template to be `render()`ed
+- `this.accessDenied()` - sends 403 response
+- `this.body` - the request body (i.e. POST data)
+- `this.error(err)` - sends 400 response
+- `this.get(fn)` - calls `fn` if request method is GET
+- `this.layout(name)` - invokes a layout
+- `this.notFound()` - sends 404 response
+- `this.post(fn)` - calls `fn` if request method is POST
+- `this.query` - the parsed querystring
+- `this.redirect([301|302], uri)` - sends redirect response
+- `this.render()` - sends rendered html using `this` data
+- `this.req` - the http request object
+- `this.res` - the http response object
+- `this.send(obj|str)` - sends a text or json response
+- `this.session` - the values encrypted in a cookie
+- `this.set(helpers)` - merges new properties into this context
+- `this.templates` - the array of precompiled template functions
+- `this.view(name)` - changes the default template to be `render()`ed
 
-Additional `helpers` specified in the [options](#options) are merged into the controllers' context. For example, adding your `db` as a helper will make it easily accessible in all controllers.
+Additional `helpers` specified in the [options](#options) are merged into the controllers' context. For example, adding your `db` as a helper will make it accessible in all controllers as `this.db`.
 
 Note: `req`, `res` and `templates` are hidden for convenience so you can `console.log(this)` without so much noise.
