@@ -128,6 +128,22 @@ test('layout css', function (t) {
   })
 })
 
+test('shared layout js', function (t) {
+  get('/dist/layouts/html5.js', function(err, res) {
+    t.error(err)
+    t.equal(res.statusCode, 200)
+    t.end()
+  })
+})
+
+test('shared layout css', function (t) {
+  get('/dist/layouts/html5.css', function(err, res) {
+    t.error(err)
+    t.equal(res.statusCode, 200)
+    t.end()
+  })
+})
+
 test('/ping', function (t) {
   get('/ping', function(err, res) {
     t.error(err)

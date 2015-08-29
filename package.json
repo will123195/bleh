@@ -7,6 +7,9 @@
   "scripts": {
     "test": "tape test"
   },
+  "pre-push": [
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/will123195/bleh.git"
@@ -40,6 +43,7 @@
     "handlebars": "^3.0.3",
     "less": "^2.5.1",
     "nodemon": "^1.4.1",
+    "pre-push": "^0.1.1",
     "request": "^2.60.0",
     "rimraf": "^2.4.3",
     "tape": "^4.1.0"
