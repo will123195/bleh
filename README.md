@@ -77,6 +77,8 @@ Routes are generated automatically based on the `pages/` folder structure. Each 
 
 The page's corresponding `js` and `css` are linked onto the html of the page automatically if the page is using the `html5` layout.
 
+Words beginning with `$` in the page name are "wildcard" url params. [example](#pagesuserusernodejs)
+
 #### layouts/
 
 Layouts can be invoked by pages or other layouts with the [`layout`](#layout) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. Also, unlike pages, layouts do not generate routes.

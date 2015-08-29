@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/will123195/bleh#readme",
   "keywords": [
+    "bleh",
     "framework",
     "microframework",
+    "micro-framework",
     "browserify",
     "less",
     "express",

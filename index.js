@@ -4,20 +4,24 @@ var path = require('path')
 var obj = require('object-path')
 var sessions = require('client-sessions')
 var bodyParser = require('body-parser')
+var fs = require('fs')
 
 var build = require('./lib/build')
 var routes = require('./lib/routes')
 
 var bleh = module.exports = function bleh (options) {
   var self = this
+  options = options || {}
+  if (!options.caller) {
+    options.caller = module.parent.filename
+  }
   if (!(this instanceof bleh)) {
     return new bleh(options)
   }
 
   var app = express()
-
   self.app = app
-  self.root = path.dirname(module.parent.filename)
+  self.root = path.dirname(options.caller)
 
   app.on('mount', function (parent) {
     self.app.parent = parent
@@ -25,7 +29,8 @@ var bleh = module.exports = function bleh (options) {
 
   if (process.env.NODE_ENV !== 'production') {
     build({
-      root: self.root
+      root: self.root,
+      main: options.main
     }, function () {
       self.start(options)
     })
@@ -54,8 +59,6 @@ bleh.prototype.start = function (options) {
     home: '/home'
   }
   var opts = merge(defaults, options)
-
-  var reqPath = path.dirname(module.parent.filename)
 
   opts.helpers = require('./lib/helpers')(opts)
 
@@ -100,7 +103,7 @@ bleh.prototype.start = function (options) {
   app.static = function (uri, path) {
     app.use(uri, express.static(path))
   }
-  app.static('/', path.join(reqPath, 'public'))
+  app.static('/', path.join(opts.root, 'public'))
 
   // routes
   app.use('/', routes(opts))
