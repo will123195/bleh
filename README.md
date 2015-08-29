@@ -81,7 +81,7 @@ Words beginning with `$` in the page name are "wildcard" url params. See [exampl
 
 #### layouts/
 
-Layouts can be invoked by pages (or other layouts) with the [`layout`](#controller-helpers) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. And unlike pages, the build does not generate routes for layouts.
+Layouts can be invoked by pages (or other layouts) with the [`layout`](#controller-methods) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. And unlike pages, the build does not generate routes for layouts.
 
 #### partials/
 
