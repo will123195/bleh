@@ -22,6 +22,9 @@ var bleh = module.exports = function bleh (options) {
   var app = express()
   self.app = app
   self.root = path.dirname(options.caller)
+  if (options.root) {
+    self.root = options.root
+  }
 
   app.on('mount', function (parent) {
     self.app.parent = parent
