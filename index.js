@@ -56,7 +56,7 @@ bleh.prototype.ready = function () {
 bleh.prototype.start = function (options) {
   options = options || {}
   var defaults = {
-    https: true,
+    https: false,
     helpers: {},
     log: console.log,
     root: this.root,
