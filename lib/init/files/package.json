@@ -1,4 +1,5 @@
 {
+  "private": true,
   "scripts": {
     "start": "nodemon server.js -e js,html,css,less,json,txt --ignore public/dist/",
     "postinstall": "bleh build"

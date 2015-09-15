@@ -28,14 +28,7 @@
     "browserify",
     "less",
     "express",
-    "handlebars",
-    "mean",
-    "sails",
-    "hapi",
-    "locomotive",
-    "flatiron",
-    "derby",
-    "meteor"
+    "handlebars"
   ],
   "devDependencies": {
     "browserify": "^11.0.1",
