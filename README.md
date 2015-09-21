@@ -23,8 +23,7 @@ npm install --save bleh browserify less express handlebars
 
 ```
 npm install -g bleh
-mkdir my-app
-cd my-app
+mkdir my-app && cd my-app
 npm init
 bleh init --help
 bleh init
@@ -172,8 +171,8 @@ For example:
 ##### pages/beep.json.node.js
 ```js
 // uri: /beep.json
-module.exports = function () {
-  this.send({
+module.exports = function ($) {
+  $.send({
     beep: 'boop'
   })
 }
@@ -194,9 +193,9 @@ module.exports = function ($) {
 ##### pages/$user/$user.node.js
 ```js
 // uri: /will123195
-module.exports = function () {
-  console.log(this.$user) // will123195
-  this.render()
+module.exports = function ($) {
+  console.log($.$user) // will123195
+  $.render()
 }
 ```
 
@@ -209,25 +208,25 @@ module.exports = function ($) {
 ```
 Each layout has a controller that runs when the [`layout`](#layout) method is invoked. A generic [`html5`](shared/layouts/html5) layout is provided that magically links the corresponding `css` and `js` onto the page if invoked.
 
-#### Controller methods
+#### Controller methods and properties
 
-- `this.accessDenied()` - sends 403 response
-- `this.body` - the request body (i.e. POST data)
-- `this.error(err)` - sends 400 response
-- `this.get(fn)` - calls `fn` if request method is GET
-- `this.layout(name)` - invokes a layout
-- `this.notFound()` - sends 404 response
-- `this.post(fn)` - calls `fn` if request method is POST
-- `this.query` - the parsed querystring
-- `this.redirect([301|302], uri)` - sends redirect response
-- `this.render()` - sends rendered html using `this` data
-- `this.req` - the http request object
-- `this.res` - the http response object
-- `this.send(obj|str)` - sends a text or json response
-- `this.session` - the values encrypted in a cookie
-- `this.set(helpers)` - merges new properties into this context
-- `this.templates` - the array of precompiled template functions
-- `this.view(name)` - changes the default template to be `render()`ed
+- `accessDenied()` - sends 403 response
+- `body` - the request body (i.e. POST data)
+- `error(err)` - sends 400 response
+- `get(fn)` - calls `fn` if request method is GET
+- `layout(name)` - invokes a layout
+- `notFound()` - sends 404 response
+- `post(fn)` - calls `fn` if request method is POST
+- `query` - the parsed querystring
+- `redirect([301|302], uri)` - sends redirect response
+- `render()` - sends rendered html using `this` data
+- `req` - the http request object
+- `res` - the http response object
+- `send(obj|str)` - sends a text or json response
+- `session` - the values encrypted in a cookie
+- `set(helpers)` - merges new properties into this context
+- `templates` - the array of precompiled template functions
+- `view(name)` - changes the default template to be `render()`ed
 
 Additional `helpers` specified in the [options](#options) are merged into the controllers' context. For example, adding your `db` as a helper will make it accessible in all controllers as `this.db`.
 

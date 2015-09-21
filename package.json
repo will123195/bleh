@@ -23,12 +23,12 @@
   "keywords": [
     "bleh",
     "framework",
-    "microframework",
     "micro-framework",
     "browserify",
     "less",
     "express",
-    "handlebars"
+    "handlebars",
+    "website"
   ],
   "devDependencies": {
     "browserify": "^11.0.1",
