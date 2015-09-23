@@ -84,7 +84,7 @@ Layouts can be invoked by pages (or other layouts) with the [`layout`](#controll
 
 #### partials/
 
-Partials can be included in other templates. Partials have neither `js`, `css`, nor a route (url) associated with them.
+Partials can be included in other templates. Partials are just plain ol' handlebars templates.
 
 ```html
 <div>

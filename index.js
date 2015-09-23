@@ -26,6 +26,28 @@ var bleh = module.exports = function bleh (options) {
     self.root = options.root
   }
 
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }))
+
+  app.set('json spaces', 2)
+
+  if (options.log) {
+    app.use(function (req, res, next) {
+      options.log(req.method, req.url)
+      next()
+    })
+  }
+
+  var sessionSecret = obj.get(options, 'sessions.secret')
+  if (sessionSecret) {
+    app.use(sessions({
+      cookieName: 'session',
+      secret: sessionSecret
+    }))
+  }
+
   app.on('mount', function (parent) {
     self.app.parent = parent
   })
@@ -77,30 +99,6 @@ bleh.prototype.start = function (options) {
       }
       next()
     })
-  }
-
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }))
-
-  app.set('json spaces', 2)
-
-  // log requests
-  if (opts.log) {
-    app.use(function (req, res, next) {
-      opts.log(req.method, req.url)
-      next()
-    })
-  }
-
-  // start session
-  var sessionSecret = obj.get(opts, 'sessions.secret')
-  if (sessionSecret) {
-    app.use(sessions({
-      cookieName: 'session',
-      secret: sessionSecret
-    }))
   }
 
   // serve static files
