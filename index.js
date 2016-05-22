@@ -55,7 +55,7 @@ var bleh = module.exports = function bleh (options) {
   if (process.env.NODE_ENV !== 'production') {
     build({
       root: self.root,
-      main: options.main
+      main: options.main || self.root
     }, function () {
       self.start(options)
     })

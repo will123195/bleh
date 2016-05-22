@@ -4,7 +4,7 @@ var handlebarsRuntimeUrl =
   + '/handlebars.runtime.min.js'
 
 module.exports = function ($) {
-  $.js.push('/dist/common.js')
+  $.js.push($.req.baseUrl + '/dist/common.js')
   $.js.push(handlebarsRuntimeUrl)
 
   $.js = $.js.reverse()
