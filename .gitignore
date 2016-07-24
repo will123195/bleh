@@ -1,3 +1,4 @@
 node_modules
 sample-app/public/dist/*
 .DS_Store
+.idea

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/will123195/bleh.svg)](https://travis-ci.org/will123195/bleh)
 
-A web framework using Browserify + Less + Express + Handlebars.
+A web framework with automatic Browserify + Less + Express + Handlebars.
 
 [![bleh](bleh.gif)](https://github.com/will123195/bleh)
 
@@ -32,18 +32,19 @@ npm start
 ## Usage
 
 ```js
-var bleh = require('bleh')
-var app = bleh()
-var port = process.env.PORT || 8080
-app.on('ready', function () {
-  app.listen(port, function () {
+const bleh = require('bleh')
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 8080
+app.use('/', bleh())
+app.on('ready', _ =>
+  app.listen(port, _ =>
     console.log([
       'My App',
-      'Running: http://localhost:' + port,
-      'NODE_ENV: ' + process.env.NODE_ENV,
+      `Running: http://localhost:${port}`,
+      `NODE_ENV: ${process.env.NODE_ENV}`,
     ].join('\n'))
-  })
-})
+)
 ```
 
 ## File structure
@@ -71,19 +72,19 @@ See also the [sample app](sample-app).
 
 #### pages/
 
-Routes are generated automatically based on the `pages/` folder structure. Each page has a [controller](#controllers) (`.node.js` file) and pages normally have `.html`, `.less` and `.browserify.js` files located together in that page's folder.
+Routes are generated automatically based on the `pages/` folder structure. Each page has a [controller](#controllers) (`.node.js` file) and normally has `.html`, `.less` and `.browserify.js` files located together in that page's folder.
 
-The page's corresponding `js` and `css` are linked onto the html of the page automatically if the page is using the `html5` layout.
+The page's `js` and `css` files are automatically embedded via the `html5` *layout*.
 
-Words beginning with `$` in the page name are "wildcard" url params. See [example](#pagesuserusernodejs).
+Words beginning with `$` in the page name are URL params. See [example](#pagesuserusernodejs).
 
 #### layouts/
 
-Layouts can be invoked by pages (or other layouts) with the [`layout`](#controller-methods) method. Layouts are just like [pages](#pages) except layout templates have a `{{{main}}}` expression--which is where the inner html is rendered. And unlike pages, the build does not generate routes for layouts.
+You can set the layout for the page by calling [`$.layout(name)`](#controller-methods-and-properties). Layouts have automatic Browserify, LESS and Handlebars compilation just like [pages](#pages) but the layout's `.html` file must contain `{{{main}}}`.
 
 #### partials/
 
-Partials can be included in other templates. Partials are just plain ol' handlebars templates.
+Partials can be included in other templates. Partials are just plain ol' handlebars templates. Put your Handlebars helper methods in `lib/handlebars-helpers.js`.
 
 ```html
 <div>
@@ -123,6 +124,7 @@ You can [reference](http://lesscss.org/features/#import-options-reference) any o
 @import (reference) 'layouts/html5/html5.less';
 .something {
   .clearfix;
+  color: @black;
 }
 ```
 
@@ -145,6 +147,7 @@ All options are optional.
 ```js
 var app = bleh({
   // default options
+  dist: 'public/dist',
   helpers: {},
   home: '/home',
   https: false,
@@ -154,6 +157,7 @@ var app = bleh({
 })
 ```
 
+- **dist** - The folder to contain the build files.
 - **helpers** - This object gets merged into the context of the [controller](#controllers).
 - **home** - The page (uri) to be used as the homepage. By default, `/home` redirects to `/`.
 - **https** - This option forces a redirect to `https` only in production.
