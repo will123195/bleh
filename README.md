@@ -37,14 +37,15 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 8080
 app.use('/', bleh())
-app.on('ready', _ =>
-  app.listen(port, _ =>
+app.on('ready', _ => {
+  app.listen(port, _ => {
     console.log([
       'My App',
       `Running: http://localhost:${port}`,
       `NODE_ENV: ${process.env.NODE_ENV}`,
     ].join('\n'))
-)
+  })
+})
 ```
 
 ## File structure
