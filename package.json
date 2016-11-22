@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "async": "^1.4.2",
+    "bluebird": "^3.4.6",
     "body-parser": "^1.13.1",
     "chalk": "^1.1.0",
     "client-sessions": "^0.7.0",
