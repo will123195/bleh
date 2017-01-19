@@ -13,12 +13,6 @@ A web framework with automatic Browserify + Less + Express + Handlebars.
 - Serves static files
 - Secure cookie-based sessions
 
-## Install
-
-```
-npm install --save bleh browserify less express handlebars
-```
-
 ## Quick start
 
 ```
@@ -26,7 +20,7 @@ npm install -g bleh
 mkdir my-app && cd my-app
 npm init
 bleh init
-npm start
+npm run dev
 ```
 
 ## Usage
@@ -37,8 +31,8 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 8080
 app.use('/', bleh())
-app.on('ready', _ => {
-  app.listen(port, _ => {
+app.on('ready', () => {
+  app.listen(port, () => {
     console.log([
       'My App',
       `Running: http://localhost:${port}`,
@@ -65,6 +59,7 @@ app.on('ready', _ => {
 ├─ public/
 │  ├─ dist/
 │  └─ robots.txt
+├─ test/
 ├─ server.js
 └─ package.json
 ```
@@ -105,13 +100,9 @@ The build is generated at runtime (except in `production`) and the app's `ready`
 
 In the `production` environment, the build step is skipped and the `ready` event fires immediately to avoid a brief delay starting the app.
 
-If you choose not to commit your `public/dist/` to version control, then you need to run `bleh build` prior to deploying your app to production (i.e. add `"postinstall": "bleh build"` to your `package.json`).
+When deploying to production, `bleh build` will run automatically after `npm install` (i.e. you should have `"postinstall": "bleh build"` in `package.json`).
 
-While developing, it's useful to run the app with a watch script to restart the app when any source file changes (which automatically rebuilds). For example:
-
-```
-nodemon -e js,html,css,less,json,txt --ignore public/dist/
-```
+Use `npm run dev` for development so your app restarts and rebuilds when a source file changes.
 
 #### Browserify
 

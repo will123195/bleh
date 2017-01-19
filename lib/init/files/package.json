@@ -1,8 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "start": "nodemon server.js -e js,html,css,less,json,txt --ignore public/dist/",
-    "postinstall": "bleh build"
+    "dev": "nodemon server.js -e js,html,css,less,json,txt --ignore public/dist/",
+    "postinstall": "bleh build",
+    "start": "node server.js",
+    "test": "ava -sv --fail-fast test/**/*.spec.js"
   },
   "browserifyCommonDependencies": []
 }
