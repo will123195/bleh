@@ -88,6 +88,22 @@ test('canonical homepage', function (t) {
   })
 })
 
+test('404', function (t) {
+  get('/not-found', function (err, res) {
+    t.error(err)
+    t.equal(res.statusCode, 404)
+    t.end()
+  })
+})
+
+test('propogate errors to parent app', function (t) {
+  get('/error', function (err, res) {
+    t.error(err)
+    t.equal(res.statusCode, 400)
+    t.end()
+  })
+})
+
 test('static files', function (t) {
   get('/robots.txt', function (err, res) {
     t.error(err)
