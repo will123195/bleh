@@ -33,7 +33,7 @@
   "devDependencies": {
     "browserify": "^11.0.1",
     "express": "^4.13.3",
-    "handlebars": "^3.0.3",
+    "handlebars": "^4.7.2",
     "less": "^2.5.1",
     "nodemon": "^1.4.1",
     "pre-push": "^0.1.1",
