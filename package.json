@@ -1,6 +1,6 @@
 {
   "name": "bleh",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "Micro-framework (Browserify, Less, Express, Handlebars)",
   "main": "index.js",
   "bin": "./bin/bleh.js",
