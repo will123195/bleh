@@ -53,7 +53,7 @@
     "fs-extra": "^0.23.1",
     "hide-property": "0.0.1",
     "md5": "^2.0.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "object-path": "^0.9.2",
     "sugar-glob": "^2.0.0"
   }
