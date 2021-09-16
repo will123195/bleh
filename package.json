@@ -45,7 +45,7 @@
     "async": "^1.4.2",
     "bluebird": "^3.4.6",
     "body-parser": "^1.13.1",
-    "chalk": "^1.1.0",
+    "chalk": "^2.0.0",
     "client-sessions": "^0.7.0",
     "commander": "^2.8.1",
     "debug": "^2.2.0",
